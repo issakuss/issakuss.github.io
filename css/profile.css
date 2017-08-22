@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/*---- CONTENTS ----*/
+#affiliation{
+  margin-top: 84px;
+}
+
+div h1{
+  font-size: 1.5em;
+  margin: 1.5em 0 1em 0
+}
+div h2{
+  font-size: 1.5em;
+}
+#img_self{
+  margin-right: 20px;
+  box-shadow: 3px 3px 0px 0px gray;
+  float: left;
+}
+dd{
+  margin: 1em 0 1em 2em;
+  text-indent: -2em;
+}
+dt{
+  font-size: 1.3em;
+  margin: 1em 0 0 0;
+}
+cite{
+  font-family: "Times New Roman", "遊明朝", YuMincho, "ヒラギノ明朝 ProN";
+  font-style: normal;
+}

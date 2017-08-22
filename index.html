@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "ja">
+  <head>
+    <meta charset = "UTF-8">
+    <link href = "css/common.css" rel = "stylesheet" type = "text/css" media = "all">
+    <script src="./js/jquery-1.10.2.min.js"></script>
+    <script type = "text/javascript" src="js/smooth-scroll.js"></script>
+    <script type = "text/javascript" src="js/btn-action.js"></script>
+    <script type = "text/javascript" src="js/html-load.js"></script>
+    <script type="text/javascript">$(function(){$("#contents").load("profile.html");});</script>
+
+    <title> WEBSITE: ISSAKU KAWASHIMA </title>
+  </head>
+
+  <body id = "profile">
+  <div id = "container">
+
+    <header>
+      <p>Issaku Kawashima Website ></p>
+      <nav id = "gnav">
+        <div id="btn_base">
+          <ul>
+      			<li><img src="./img/btn_base_top.png" width = 120 height = 120 class="btn"></li>
+      			<li><img src="./img/btn_base_profile.png" width = 120 height = 120 class="btn"></li>
+      		</ul>
+        </div>
+        <div id="btn_mount">
+          <ul>
+      			<li><img src="./img/btn_mount_top.png"
+                     width = 120 height = 120
+                     class="btn" id="btn_mount_top"
+                     onclick="load_top();" onmouseover="liftUp_top();" onmouseout="fall_top()"></li>
+      			<li><img src="./img/btn_mount_profile.png"
+                     width = 120 height = 120
+                     class="btn" id="btn_mount_profile"
+                     onclick="load_profile();" onmouseover="liftUp_profile();" onmouseout="fall_profile()"></li>
+      		</ul>
+        </div>
+      </nav>
+    </header>
+
+    <div id = "contents">
+
+    </div>
+
+  </div>
+  <script>
+    smoothScroll.init() ;
+
+  </script>
+  </body>
+</html>
