@@ -14,6 +14,7 @@
 #lnav a{
   color: #646464;
   text-decoration: none;
+  font-size: 0.9em;
 }
 #lnav a:hover{
   text-decoration: underline;

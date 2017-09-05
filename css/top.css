@@ -36,11 +36,10 @@
   margin-right: auto;
 }
 
-#con_news{
+#con_news p{
   padding-top: 36px;
 }
 
 #con_twitter{
-  height: 100vh;
   width: 50vh;
 }

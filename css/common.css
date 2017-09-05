@@ -1,6 +1,7 @@
 @charset "UTF-8";
 body{
-  background: white;
+  margin: 0;
+  padding: 0;
 	color: #646464;
   font-family: "ヒラギノ角ゴ Pro", "メイリオ";
 }
@@ -46,10 +47,6 @@ header #gnav {
 header p{
   width: 230px;
   margin-left: auto;
-}
-header a{
-  text-decoration: none;
-  font-size: 1.5em;
 }
 header li{
   margin-bottom: 1em;
