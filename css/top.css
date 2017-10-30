@@ -4,7 +4,7 @@
 }
 #mv {
   height: 100%;
-  width: auto;
+  width: 60%;
   overflow: hidden;
 }
 #con_news{
@@ -13,7 +13,7 @@
 #con_mv{
   float: left;
   height: 100%;
-  width: auto;
+  width: 60vh;
   position: relative;
   margin-right: 20px
 }
