@@ -13,10 +13,12 @@
 #con_mv{
   float: left;
   height: 100%;
+  width: auto;
   position: relative;
   margin-right: 20px
 }
 #con_mc{
+  float: left;
   padding-top: 30vh;
   padding-bottom: 70vh;
   width: 240px;
