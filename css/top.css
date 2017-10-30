@@ -19,8 +19,8 @@
 }
 #con_mc{
   float: left;
-  padding-top: 30%;
-  padding-bottom: 10%;
+  padding-top: 30vh;
+  padding-bottom: 70vh;
   width: 240px;
   height: 100%;
 }
@@ -41,9 +41,10 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-#con_news p{
+#dmy{
   clear: both;
+}
+#con_news p{
   padding-top: 36px;
 }
 
