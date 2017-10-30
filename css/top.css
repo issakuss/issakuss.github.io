@@ -19,9 +19,8 @@
   margin-right: 20px
 }
 #con_mc{
-  background: red;
   float: left;
-  padding-top: 50px;
+  padding-top: 20vh;
   padding-bottom: 0;
   width: 240px;
   height: 100%;
