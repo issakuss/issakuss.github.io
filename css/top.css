@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 #con_news{
-  height: 100vh;
+  height: 100%;
 }
 #con_mv{
   background: yellow;
@@ -45,6 +45,7 @@
 }
 
 #con_news p{
+  clear: both;
   padding-top: 36px;
 }
 
