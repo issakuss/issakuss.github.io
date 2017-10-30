@@ -4,8 +4,6 @@
 }
 #mv {
   height: 100%;
-  width: 60%;
-  overflow: hidden;
 }
 #con_news{
   height: 100vh;
@@ -16,6 +14,7 @@
   width: 60vh;
   position: relative;
   margin-right: 20px
+  overflow: hidden;
 }
 #con_mc{
   float: left;
