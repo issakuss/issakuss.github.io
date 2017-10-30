@@ -21,7 +21,7 @@ li{
   list-style: none;
 }
 div{
-  margin-left: 9px;
+  margin-left: 0px;
 }
 #container {
 	padding: 0 90px 0 252px;
@@ -38,13 +38,13 @@ header {
 }
 header #gnav {
 	width: 150px;
-	margin: 99px 0 0 18px;
+	margin: 99px 0 0 0;
   padding-top: 0;
   background: red;
   text-align: left;
 }
 header p{
-  margin: 0 0 0 0;
+  margin: 0 0 0 10px;
 }
 header li{
   margin-bottom: 1em;
