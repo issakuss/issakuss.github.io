@@ -3,7 +3,9 @@
   height: 100vh;
 }
 #mv {
-  height: 100vh;
+  height: 100%;
+  width: auto;
+  overflow: hidden;
 }
 #con_news{
   height: 100vh;
@@ -17,6 +19,7 @@
 #con_mc{
   padding-top: 30vh;
   padding-bottom: 70vh;
+  width: 240px;
 }
 
 #con_mc p {
