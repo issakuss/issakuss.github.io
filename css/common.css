@@ -32,21 +32,19 @@ header {
   position: fixed;
   left: 0;
 	top: 0;
-	width: 252px;
 	height: 100vh;
-	background: white;
+	background: red;
 	padding: 35px 0 0 0;
 }
 header #gnav {
-	width: 180px;
+	width: 150px;
 	margin: 99px 0 0 18px;
   padding-top: 0;
-  background: white;
+  background: red;
   text-align: left;
 }
 header p{
-  width: 230px;
-  margin-left: auto;
+  margin: 0 0 0 0;
 }
 header li{
   margin-bottom: 1em;
