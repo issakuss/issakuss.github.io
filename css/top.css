@@ -8,6 +8,7 @@
   overflow: hidden;
 }
 #con_news{
+  clear: both;
   height: 100%;
 }
 #con_mv{
@@ -19,8 +20,8 @@
 }
 #con_mc{
   float: left;
-  padding-top: 30vh;
-  padding-bottom: 70vh;
+  padding-top: 0;
+  padding-bottom: 0;
   width: 240px;
   height: 100%;
 }
@@ -40,9 +41,6 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-#dmy{
-  clear: both;
 }
 #con_news p{
   padding-top: 36px;
