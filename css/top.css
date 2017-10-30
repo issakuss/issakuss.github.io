@@ -1,6 +1,7 @@
 @charset "UTF-8";
 #con_face{
   height: 100vh;
+  background: red;
 }
 #mv {
   height: 100%;
@@ -9,14 +10,16 @@
   height: 100vh;
 }
 #con_mv{
+  background: yellow;
   float: left;
   height: 100%;
-  width: 60vw;
+  width: 60%;
   position: relative;
   margin-right: 20px
   overflow: hidden;
 }
 #con_mc{
+  background: blue;
   float: left;
   padding-top: 30vh;
   padding-bottom: 70vh;
