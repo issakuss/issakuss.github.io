@@ -20,10 +20,13 @@ function liftUp_top(){
   var img = $(btn_mount_top)
   info_top = liftUp(img, info_top);
 }
-
 function liftUp_profile(){
   var img = $(btn_mount_profile)
   info_profile = liftUp(img, info_profile);
+}
+function liftUp_tech(){
+  var img = $(btn_mount_tech)
+  info_tech = liftUp(img, info_tech);
 }
 
 function fall_top(){
@@ -34,6 +37,11 @@ function fall_profile(){
   var img = $(btn_mount_profile)
   info_profile = fall(img, info_profile);
 }
+function fall_tech(){
+  var img = $(btn_mount_tech)
+  info_tech = fall(img, info_tech);
+}
+
 
 // BTN ACTION
 function liftUp(img, info){
@@ -61,7 +69,7 @@ function fall(img, info){
       info[0] = 0;
       info[1] = info[1] * coef_absorb;
     }
-    if(Math.abs(info[1])<0.03　&& info[0]<0.03){
+    if(Math.abs(info[1])<0.1　&& info[0]<0.1){
       info[0] = 0;
       info[1] = 0;
       clearInterval(h)
