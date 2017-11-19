@@ -24,9 +24,10 @@
   padding-top: 20vh;
   padding-bottom: 0;
   height: 100%;
-  width: auto;
+  width: 100%;
 }
 #con_mc{
+  background-color: blue;
   width: 240px;
   height: 100%;
 }
