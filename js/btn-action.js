@@ -6,6 +6,8 @@ var maxDeg = 30;
 // BTN INFO
 var info_top = [0, 0];
 var info_profile = [0, 0];
+var info_tech = [0, 0];
+
 
 // EACH BTNS ACTION
 function load_top(){
