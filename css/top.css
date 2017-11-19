@@ -18,15 +18,14 @@
   position: relative;
   margin-right: 20px
 }
-#cushion{
-    float: left;
-    width: auto;
-    height: 100%;
-}
-#con_mc{
+#con_con_mc{
   float: left;
   padding-top: 20vh;
   padding-bottom: 0;
+  height: 100%;
+  width: auto;
+}
+#con_mc{
   width: 240px;
   height: 100%;
 }
