@@ -19,14 +19,15 @@
   margin-right: 20px
 }
 #con_con_mc{
-  background-color: red;
+  background-color: green;
   padding-top: 0vh;
   padding-bottom: 0;
   height: 100vh;
   width: auto;
 }
 #con_mc{
-  background-color: blue;
+  background-color: yellow;
+  margin-left: auto;
   width: 240px;
   height: 100%;
 }
