@@ -12,7 +12,6 @@
   height: 100vh;
 }
 #con_mv{
-  float: left;
   height: 100%;
   width: auto;
   position: relative;
@@ -20,14 +19,14 @@
 }
 #con_con_mc{
   float: left;
-  background-color: blue;
+  background-color: yellow;
   padding-top: 20vh;
   padding-bottom: 0;
   height: 100%;
   width: auto;
 }
 #con_mc{
-  background-color: red;
+  background-color: green;
   width: 240px;
   height: 100%;
 }
