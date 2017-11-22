@@ -4,6 +4,7 @@ import pickle
 import sqlite3
 import os
 import numpy as np
+from update import update_model
 
 # import HashingVectorizer from local dir
 from vectorizer import vect
@@ -75,3 +76,8 @@ def feedback():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+if __name__ == '__main__':
+    clf = update_model(dp_path=db, model=clf, batch_size=10000)
+    
