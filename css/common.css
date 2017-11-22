@@ -32,7 +32,7 @@ header {
   position: fixed;
   left: 0;
 	top: 0;
-	width: 252px;
+	width: 180px;
 	height: 100vh;
 	background: white;
 	padding: 35px 0 0 0;
@@ -45,7 +45,7 @@ header #gnav {
   text-align: left;
 }
 header p{
-  width: 230px;
+  text-align: right;
   margin-left: auto;
 }
 header li{
