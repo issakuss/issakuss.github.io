@@ -20,46 +20,28 @@ body, h1, h2, p, div, ul,li{
 li{
   list-style: none;
 }
-div{
-  margin-left: 9px;
-}
-#container {
-	padding: 0 90px 0 180px;
-}
+
 
 /*---- GLOBAL NAVI ----*/
-header {
-  position: fixed;
-  left: 0;
-	top: 0;
-	width: 180px;
-	height: 100vh;
-	background: white;
-	padding: 35px 0 0 0;
-}
-header #gnav {
-	width: 180px;
-	margin: 99px 0 0 18px;
-  padding-top: 0;
-  background: white;
-  text-align: left;
-}
-header p{
+header{
   text-align: center;
-  margin-left: auto;
-}
-header li{
-  margin-bottom: 1em;
-}
-nav{
   position: fixed;
-  top: 0;
-}
-.btn{
-  box-shadow: 0px 0px 0px 0px white;
+  padding-top: 36px;
 }
 
-#btn_mount{
+#gnav {
+  margin-top: 18px;
+  text-align: left;
+  width: 180px;
+  position: relative;
+}
+#btn_mount {
   position: absolute;
   top: 0px;
+}
+#btn_mount{
+  position: absolute;
+}
+#contents{
+  margin-left: 180px;
 }
