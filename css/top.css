@@ -7,7 +7,6 @@
   margin-top: 16vh;
   margin-left: auto;
   text-align: center;
-  background-color: gray;
 }
 #con_grt p{
   margin-bottom: 5vh;
@@ -18,7 +17,6 @@
   font-size: 42px;
 }
 #con_mv{
-  background-color: red;
   height:100vh;
   overflow: hidden;
 }
@@ -41,7 +39,7 @@
 }
 #con_twt{
   height: 70vh;
-  width: auto;
+  width: 96px;
   background-color: gray;
 }
 
