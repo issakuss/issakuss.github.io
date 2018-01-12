@@ -41,7 +41,7 @@
 }
 #con_twt{
   height: 70vh;
-  width: 640px;
+  width: auto;
   background-color: gray;
 }
 
