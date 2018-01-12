@@ -22,6 +22,7 @@
 }
 #grt_news{
   position: absolute;
+  display: inline-block;
   bottom: 0px;
   width: 360px;
   margin-left: auto;
@@ -38,7 +39,7 @@
   margin-right: auto;
 }
 #con_twt{
-  margin-top: 18px;
+  padding-top: 18px;
   clear: both;
   height: 100vh;
 }
