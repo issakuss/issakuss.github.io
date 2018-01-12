@@ -8,6 +8,7 @@
 #con_mv{
   height:100vh;
   overflow: hidden;
+  margin-bottom: 18px;
 }
 #mv{
   height: 100%;
@@ -20,28 +21,22 @@
   margin-bottom: 18px;
   text-align: center;
 }
-#grt_news{
+.class{
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 36px;
+  text-align: center;
+  margin-top: 36px;
+  margin-bottom: 36px;
   width: 360px;
   margin-left: auto;
   margin-right: auto;
 }
 #grt_news h1 {
-  margin-top: auto;
   font-size: 42px;
-  text-align: center;
-}
-#v{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 #con_twt{
-  padding-top: 320px;
   clear: both;
   height: 100vh;
 }
