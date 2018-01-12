@@ -35,12 +35,12 @@
   padding-top: 36px;
 }
 #con_link{
-  width: auto;
   background-color: red;
 }
 #con_twt{
-  height: 70vh;
-  width: 96px;
+  height: 90vh;
+  width: auto;
+  overflow: scroll;
   background-color: gray;
 }
 
