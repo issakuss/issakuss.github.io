@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 #lnav{
+  position: fixed;
   padding: 18px 0 18px 9px;
   margin: 18px 0 0 0;
   background: linear-gradient(hsla(360, 100%, 100%, 0.8) -30%,
