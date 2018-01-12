@@ -35,6 +35,7 @@
   padding-top: 36px;
 }
 #con_link{
+  width: auto;
   background-color: red;
 }
 #con_twt{
