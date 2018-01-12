@@ -34,14 +34,10 @@
 #con_second p{
   padding-top: 36px;
 }
-#con_link{
-  background-color: red;
-}
 #con_twt{
   height: 90vh;
   width: auto;
   overflow: scroll;
-  background-color: gray;
 }
 
 /*
