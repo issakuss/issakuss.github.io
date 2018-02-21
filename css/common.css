@@ -21,27 +21,59 @@ li{
   list-style: none;
 }
 
-
 /*---- GLOBAL NAVI ----*/
-header{
-  text-align: center;
-  position: fixed;
-  padding-top: 36px;
-}
-
-#gnav {
-  margin-top: 18px;
-  text-align: left;
-  width: 180px;
-  position: relative;
-}
-#btn_mount {
-  position: absolute;
-  top: 0px;
-}
-#btn_mount{
-  position: absolute;
+#forSP{
+	display: none;
 }
 #contents{
   margin-left: 180px;
+}
+@media screen and (max-width: 479px){
+	#contents{
+		margin-left: 0px;
+	}
+	#forPC{
+		display: none;
+	}
+	#forSP{
+    text-align: right;
+    display: inherit;
+		position: fixed;
+    padding-top: 36px;
+    width: 100%;
+	}
+  #menuBtn{
+    font-size: 36px;
+    margin-right: 5vh;
+  }
+	#gnav_sp{
+    width: 100%;
+    float: left;
+		display: none;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 36px;
+    line-height: 2em;
+	}
+}
+#forPC{
+	text-align: center;
+	position: fixed;
+	padding-top: 36px;
+}
+#gnav {
+	margin-top: 18px;
+	text-align: left;
+	width: 180px;
+	position: relative;
+}
+#btn_mount {
+	position: absolute;
+	top: 0px;
+}
+#btn_mount{
+	position: absolute;
+}
+#contents{
+  clear: both;
 }

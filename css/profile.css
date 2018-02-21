@@ -29,3 +29,8 @@ cite{
   font-family: "Times New Roman", "遊明朝", YuMincho, "ヒラギノ明朝 ProN";
   font-style: normal;
 }
+@media screen and (max-width: 479px){
+  #lnav{
+    display: none;
+  }
+}

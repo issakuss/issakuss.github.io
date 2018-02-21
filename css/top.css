@@ -39,46 +39,11 @@
   width: auto;
   overflow: scroll;
 }
-
-/*
-
-#grt_txt{
-  margin-top: 10vh;
+@media screen and (max-width: 479px){
+  #con_mv{
+    display: none;
+  }
+  #con_link{
+    display: none;
+  }
 }
-#grt_txt p {
-  margin-bottom: 18px;
-  text-align: center;
-}
-.grt{
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 64px;
-  margin-bottom: 64px;
-  width: 360px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.grt h1 {
-  font-size: 42px;
-  margin-bottom: 0;
-}
-#con_twt{
-  clear: both;
-  height: 100vh;
-}
-#con_twt p{
-  margin-top:18px;
-}
-
-.SandboxRoot.env-bp-970 .timeline-Tweet-text {
-    font-size: 10.5pt !important;
-    line-height: 14pt!important;
-    }
-
-.SandboxRoot.env-bp-820 .timeline-Tweet-text {
-    font-size: 10.5pt !important;
-    line-height: 14pt!important;
-    }

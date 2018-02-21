@@ -1,3 +1,261 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.12.3 (455520)"/><meta name="author" content="川島一朔"/><meta name="created" content="2017-11-22 02:02:17 +0000"/><meta name="source" content="desktop.win"/><meta name="source-application" content="evernote.win32"/><meta name="source-url" content="https://mail.google.com/mail/u/0/?ui=2&amp;view=btop&amp;ver=1qarjayb7dfsd&amp;q=osu&amp;qs=true&amp;search=query&amp;th=15fcdb1d6b0c2940&amp;qt=osu.1&amp;cvid=1"/><meta name="updated" content="2017-11-23 08:24:54 +0000"/><title>Open ViBEでP300 Speller を実践する</title></head><body><div><span style="font-size: 18px; font-weight: bold;">Open ViBEでP300 Speller を実践する</span></div><div><br/></div><div>執筆日：2017年11月23日</div><div>環境：CORE i5 7th Gen を積んだノートPC, Windows10, HD-72 (Cognionics Inc.)</div><div><br/></div><div><br/></div><div><b>Open ViBE とは</b></div><div><b><br/></b></div><div>Open ViBE という、様々な脳波解析・フィードバックを行うフリーソフトがある。</div><div><a href="http://openvibe.inria.fr">http://openvibe.inria.fr</a></div><div>GUI上で「ボックス」と呼ばれるモジュール（？）を繋げるだけで、簡単に解析プロトコルを組み立てることができる。</div><div>そのボックスの集まり、解析プロトコルの一連の流れを「シナリオ」と呼び、xml ファイルとして保存できる。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">P300 Speller とは</span></div><div><br/></div><div>こいつのこと↓</div><div><a style="color: rgb(17, 85, 204); line-height: 1.45;" href="https://www.youtube.com/watch?v=hoKnQo9mfyQ">https://www.youtube.com/watch?v=hoKnQo9mfyQ</a></div><div>まず、指定されたアルファベットが光ったときのP300事象関連電位を機械学習する。</div><div>すると、頭の中で（自由に）選んだアルファベットを、機械が当てることができるようになる。というもの。</div><div><br/></div><div>Open ViBE にはデモとして、P300 Spelling のシナリオが入っている。<br/></div><div>下記リンクに解説があるので、こちらの通りにやればできるらしい。</div><div><a href="http://openvibe.inria.fr/openvibe-p300-speller/">http://openvibe.inria.fr/openvibe-p300-speller/</a></div><div><br/></div><div>今回は、Cognionics 製、HD-72という脳波計でこのシナリオを試してみる。</div><div>Cognionics も P300 speller を実行するためのWIKIページを用意している。</div><div><a href="http://cognionics.com/wiki/pmwiki.php/Main/Real-timeP300SpellerWithOpenVibe">http://cognionics.com/wiki/pmwiki.php/Main/Real-timeP300SpellerWithOpenVibe</a></div><div>もっとやりやすくなるようにシナリオに改良を加えているらしいが、肝心の改良版シナリオをDLするリンクが見つからない。</div><div>説明も途中で切れているように見えるし、編集途中なんだろうか。</div><div>諦めて、元のシナリオを実践する。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">Open ViBE へ脳波データを転送する</span></div><div><br/></div><div><span style="line-height: 1.45;">Cognionics Data Acquisition を開き、脳波計HD-72と接続。</span></div><div>サンプリングレートが250だと後でエラーが出る。1000にしよう。</div><div><span style="line-height: 1.45;">[Start LabStreaming Layer] をクリックして、データを別ソフトへ転送できる状態にしておく。</span></div><div>openvibe acquisition server を起動する（管理者として実行しないと、後にエラーが出る場合もある？）。</div><div>Driver に、[LabStreamingLayer (LSL) (unstable)] を指定。</div><div>Connection Portは1024、Sample count per sent block に8。</div><div>[Preference] をクリックし、Drift Tolerance (ms) が8、Jitter Estimation Count For Drift が128になっていることを確認。</div><div>[connect] [play] をクリック。</div><div>メーター的なものが動き出せば成功。</div><div><br/></div><div><span style="line-height: 1.45;">OpenViBE Designer v1.3.0 を管理者として起動し（管理者としてじゃないと、脳波が保存できない）、[opens an existing scenario] のボタンをクリック。</span></div><div><span style="line-height: 1.45;">[Program Files (x86)/openvibe/share/openvibe/scenario/bci_examples/p300-xdawn-0-signal-monitoring.xml] というシナリオファイルを開いて、再生マークを押すと、脳波の様子をモニタリングできる。</span></div><div><br/></div><div>このあたりで脳波系を被験者にかぶせる。</div><div>きれいな脳波になるよう脳波計を調整する。</div><div>イマイチきれいじゃなくても、案外うまくいくようだ。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">トレーニングデータを集める</span></div><div><br/></div><div>「このアルファベットを意識しているときはこのP300」というデータを集める。</div><div>p300-xdawn-1-acquisiton.xml のシナリオ開いて再生。</div><div>アルファベット盤が出てくるので、被験者に見ていてもらう。</div><div>20秒経過すると、アルファベットの内どれかが青く光る。</div><div>その後様々なアルファベットが白く光るので、初めに青く光ったアルファベットを見続けてもらう。</div><div>しばらく続けると、点滅が止まった後、また別のアルファベットが青く光る。</div><div>今度はそのアルファベットを見続ける。</div><div>これを繰り返すと、10分くらいで終了する。</div><div>signals というフォルダに、p300-xdawn-train-[日付].ov ファイルが出来上がる。</div><div>次に脳波を測るまで15分ほどかかるので、一旦脳波計は外してしまってよいだろう。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">トレーニングデータに Spatial Filter をかける</span></div><div><br/></div><div>xDAWN というアルゴリズムを使い、脳波データに Spatial Filter をかける。</div><div>Spatial Filter というのは、特徴をうまく抽出するため脳波によく用いられるものらしい。</div><div>p300-xdawn-2-train-xDAWN.xmlを開く。</div><div>一番上にある、Generic stream reader のボックスをダブルクリック。</div><div>先程できた ov ファイルを指定して、[Apply]。</div><div><br/></div><div>シナリオを再生すると、(openvibe-designer.exe:15912): Gtk-WARNING **: というメッセージが出る。</div><div>しかしエラーメッセージというわけではないようだ。<br/></div><div>あくまで WARNING だけで動作はする。気にしないことにする。</div><div><br/></div><div>10分ほどで終了。<br/></div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">Spatial Filter をかけたトレーニングデータをもとに学習を行う</span></div><div><br/></div><div>集めてきたデータを使って、「このアルファベットの時はこういうP300なんだなぁ」というパターンを機械に学習してもらう。</div><div>p300-xdawn-3-train-classifier.xml を開く。</div><div>Generic stream reader ボックスをダブルクリックして、先ほどと同じ ov ファイルを指定して再生。</div><div>この時も、管理者として実行していないとエラーを吐くので注意。</div><div>5分ほどで終了。</div><div>コマンドプロンプトの画面を見ると、Accuracy が表示される。</div><div>90% を超える精度のようだ。</div><div>適当につけたノイジー脳波なのにすごい。</div><div><br/></div><div><br/></div><div><b>学習がうまくいったかテスト</b></div><div><b><br/></b></div><div>いよいよ実践。再度脳波計を装着する。</div><div><span>p300-speller-3-online.xml を開いて再生。</span></div><div>再度アルファベット盤が出てくる。</div><div>先程と同様、文字のどれかひとつが青く光った後、様々なアルファベットが白く光る。</div><div>青く光った文字を見つめ続けてもいいが、自由に選んだアルファベットを見つめ続ける。</div><div>しばらくすると、被験者がどのアルファベットを見つめ続けていたか、脳波をもとに機械が判定してくれる。</div><div>緑色で光ったのが、機械が判定したアルファベット。</div><div>E, E, G という順番で見つめ続けたが、ちゃんとその通りに判定してくれた。すごい。</div><div><br/></div><div><br/></div><div><br/></div><div><br/></div></body></html>
+<!DOCTYPE html>
+<html lang = "ja">
+  <head>
+    <meta charset = "UTF-8">
+    <meta name="description">
+    <title>TECH_NOTES (Issaku Kawashima)</title>
+    <link href = "prettify.css" rel = "stylesheet" type = "text/css" media = "all">
+    <link href = "tech.css" rel = "stylesheet" type = "text/css" media = "all">
+    <script src="js/prettify.js"></script>
+    <script src="js/lang-matlab.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>OpenViBEでP300Speller実践</h1>
+      <p>
+        執筆日：2017年11月23日<br>
+				最終更新日：2018年1月22日<br>
+        環境：Windows10, HD-72（脳波計）
+      </p>
+    </header>
+    <section>
+      <h2>1. OpenViBEとは</h2>
+      <p>
+        <a href="http://openvibe.inria.fr">
+          OpenViBE</a>は、様々な脳波解析を行うフリーソフトです。<br>
+				特に、オンラインでの解析（脳波を測定しながらの解析）が得意です。<br>
+				そのため、ニューロフィードバックによく用いられるようです。<br>
+				GUI上でBOXと呼ばれるモジュール（？）を繋げるだけで、簡単に解析プロトコルを組み立てられます。<br>
+				このBOXの集まり、解析プロトコルの一連の流れはScenarioと呼ばれ、XMLファイルとして保存できます。<br>
+				OpenViBEのインストール方法などは別のどこかをご参照ください。<br>
+				</p>
+    </section>
+    <section>
+      <h2>2. P300 Spellerとは</h2>
+      <p>
+				まずP300とは、とてもとてもざっくり言うと、刺激に対して「おっ？」と思った時に出現する独特な脳波です。<br>
+			  被験者が刺激を受けてから300ミリ秒後頃に出現します。<br>
+				このP300を利用して、頭の中で考えている文字を推測しようと言うのがP300 Spellerです。<br>
+				体が一切動かせなくても、意思を伝えることができるようになるすごいシステムです。<br>
+				実際の流れは、この動画で見てみてください。
+			</p>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/XIr2cRKFolY?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			<p>
+				流れはこうです。<br>
+				まず被験者は、文字盤のうち指定されたひとつを見つめ続けます。<br>
+				盤にある文字が一列または一行ずつ、次々と光ります。<br>
+				見つめている文字が光った時と、そうでない文字が光った時とでは、出現する脳波のパターンが異なります。<br>
+				機械は、指定した文字を光らせた時と、別の文字を光らせた時の脳波を比較します。<br>
+				そして機械は、P300に着目し、どうすればそれらの脳波を区別することができるかを学習します。<br>
+				一旦機械が学習を済ませてしまえば、あとは脳波を機械に見せるだけです。<br>
+				機械がパターンを読み取り、それが「考えている文字が光った時」の脳波かそうでないかを判別します。<br>
+				これによって、どの文字を頭に思い浮かべているかを当てるのです。
+			</p><p>
+				OpenViBEにはデモとして、このP300 Spellerを実践するためのシナリオが付属しています。<br>
+				これを実行することで、P300 Spellerを試すことができます。<br>
+				Cognionics Inc.も、このP300 Spellerデモを自社脳波計で走らせるための
+				<a href="http://cognionics.com/wiki/pmwiki.php/Main/Real-timeP300SpellerWithOpenVibe">
+					Wikiページ</a>
+				を用意しています。<br>
+				…が、どうも説明が途中で切れているようです。<br>
+				今回は、
+				<a href="http://openvibe.inria.fr/openvibe-p300-speller/">
+					こちらの解説</a>
+				を参考にしながら実践します。
+			</p>
+    <section>
+      <h2>3. OpenViBEへ脳波データを転送する</h2>
+      <p>
+				今回は、LabStreamingLayerという規格を使って、OpenViBEへオンラインにデータを送ります。<br>
+				まず、脳波計やデータ取得ソフト側の設定を整えて、LabStreamingLayerでデータを飛ばせるようにします<br>
+				Cognionics Inc.製HD-72の場合の設定方法は、
+				<a href="article_1.html">
+					こちら</a>
+				をご覧ください。<br>
+				続いて、OpenViBE側の設定です。<br>
+				まず、[openvibe acquisition server.exe]を、[管理者として実行]します<br>
+				（もしかしたら普通に実行でもいいかもしれません）<br>
+				接続の設定を下記の通り行います。<br>
+				・Driverに[LabStreamingLayer(LSL)(unstable)]を指定<br>
+				・Connection Portを1024に設定<br>
+				・Sample count per sent blockを8に設定
+				（写真.1）こんな感じになります。
+				さらに、[Preference]をクリックして下記のように設定を進めます。<br>
+				・Drift Tolerance (ms)を8に設定<br>
+				・Jitter Estimation Count For Driftを128に設定<br>
+				HD-72を使っている場合は、[Driver Properties]をクリックして下記の設定をします。<br>
+				・Signal streamを、[Cognionics HD-72 64CH 1702HDG / myuidXXXXXX] に設定<br>
+				XXXXXXの部分には、機種番号みたいなものが入っています。<br>
+				[Cognionics HD-72 64CH 1702HDG Impedance / myuidXXXXXX]だとうまくいきません。<br>
+				脳波ではなく、電気抵抗のデータを送信してしまっているのでしょう。<br>
+			</p><p>
+				これで設定完了です。<br>
+				[connect]と[play]をクリックして、メーターっぽいものが動き出せば成功です。
+			</p>
+			<aside class="ts">
+				<h4>TROUBLE SHOOTING: メーターっぽいのが動き出さない</h4>
+				上述の設定をひとつずつ見直してみましょう。<br>
+				あとは、脳波計側のLabStreamingLayerスタートボタンがオフになってたり、なんてこともよくあります。<br>
+				openvibe acquisiton serverの裏で、コマンドプロンプト画面が動いています。<br>
+				ここのエラーメッセージも参考にしてください。
+			</aside>
+		</section>
+		<section>
+			<h2>4. シナリオの準備</h2>
+			<p>
+				いよいよシナリオを動かします。<br>
+				openvibe designer.exeを管理者として実行します。<br>
+				管理者として起動しないと、脳波が保存できず詰みます。<br>
+				先に、使用するシナリオを全部開いておきましょう。<br>
+				[opens an existing scenario]をクリックするとシナリオを開けます。<br>
+				使用するシナリオは、下記の5つです。<br>
+				・p300-xdawn-0-monitoring.xml<br>
+				・p300-xdawn-1-acquisition.xml<br>
+				・p300-xdawn-2-train-xDAWN.xml<br>
+				・p300-xdawn-3-train-classifier.xml<br>
+				・p300-speller-4-online.xml<br>
+				僕の環境ですとすべて、下記のディレクトリに入っています。<br>
+				[Program Files(x86)/openvibe/share/openvibe/scenarios/bci_examples/p300-speller-xDAWN]
+			</p><p>
+				p300-xdawn-0-monitoring.xmlのタブを開き、再生マークを押してみましょう。<br>
+				現在の脳波の状態をモニタリングできます。<br>
+				脳波計のデータ取得ソフト等で脳波の確認ができるなら、必ずしもこのシナリオは必要ありません。<br>
+				このあたりで脳波計を被験者に取り付けましょう。<br>
+			</p>
+		</section>
+		<section>
+			<h2>5.トレーニングデータを集める</h2>
+			<p>
+				「指定した文字を光らせた時はこういう脳波」「そうでないときはこういう脳波」というデータを集めます。<br>
+				p300-xdawn-1-acquisiton.xmlのシナリオを再生します。<br>
+				すると、文字盤が表示されるので、被験者にはそれを見ていてもらいます。<br>
+				20秒経過すると、文字のうちどれかが青く光ります。<br>
+				その後、文字が行・列ごとに次々と光出すようになります。<br>
+				被験者は、指定された文字を見つめ続けます。<br>
+				10分ほどで終了します。<br>
+				データは勝手に保存してくれます。
+			</p>
+    <section>
+      <h2>6. xDAWNフィルタを設計する</h2>
+      <p>
+        あまり理解できていないのですが、xDAWNという、空間フィルタを学習させます。<br>
+				超ざっくり言うと、同時に装着した電極のうちどれにP300がくっきり表れているかを学習させるステップのようです。<br>
+				p300-xdawn-2-train-xDAWN.xmlのシナリオをタブから選択します。<br>
+				一番上にある、Generic stream readerのボックスをダブルクリックします。<br>
+			</p>
+				<img src="article_2/pic_1.PNG">
+      <p>
+				[Filename]のところに、先程取得されたデータを指定します。<br>
+				p300-xdawn-1-acquisiton.xmlがあるディレクトリに、signalsというフォルダがあります。<br>
+				その中に、先程保存された脳波データがあります。<br>
+				ファイル名に開始時間が記されているので、参考にして探してください。<br>
+				ちなみに、僕の環境ですと、ファイルサイズは168.0MBです。<br>
+        [Save]をクリックして保存します。
+			</p><p>
+				シナリオを再生すると、学習が始まります。<br>
+				10分で終了します。<br>
+				PCを変えても10分なので、収束したら終了というより、10分の中でベストを尽くすようになっているのでしょう。<br>
+			</p>
+			<aside class="ts">
+				<h4>TROUBLE SHOOTING: 10分以上経っても学習が終わらない</h4>
+				コマンドプロンプト画面を見てみてください。<br>
+        「Generalized eigen vector decomposition failed.」<br>
+        というエラーメッセージが出ていませんか。<br>
+        残念ながら、対策はわかりません。<br>
+        僕が試している環境でも、ある時からこのエラーばかり出るようになってしまいました。<br>
+        ひょっとすると、500Hzのサンプリングレートではダメで、1000Hzが必要かもしれない…？<br>
+        僕のようにこのエラーにハマってしまった人は、このページの9章をご覧ください。
+			</aside>
+    </section>
+    <section>
+      <h2>7. LDA分類器の学習を行う</h2>
+      <p>
+        P300 Spellerは、線形判別分析（Linear Discriminant Analysis: LDA) と呼ばれる方法で脳波を見分けます。<br>
+        「見ている数字を光らせた時」と「見ていない数字を光らせた時」との脳波を区別するために、どういう直線を引けばいいかを学習します。<br>
+        脳波を入力すると、それが「見ている数字の時」であるかどうか（0 or 1）を返す関数を自動生成している、とも言い換えられるとも思います。
+      </p><p>
+        p300-xdawn-3-train-classifier.xmlのシナリオを開きます。<br>
+        先ほどと同じように、Generic stream readerのボックスを開き、先ほどと同じovファイルを指定します。<br>
+        再生すると、5分ほど（？）で終了します。<br>
+        コマンドプロンプトの画面をみると、下記のように表示されるはずです。
+      </p>
+        <img src="article_2/pic_3.PNG">
+      <p>
+        （こちらのスクリーンショットは、本ページ9章に書かれた方法でやったときのものですが、内容は同じだったはずです）<br>
+        どういう内容が書いてあるのか一部簡単に解説しましょう。
+        脳波を区別する関数を作るのがこの章の目的ですが、手持ちのデータを区別できるだけでは不十分です。<br>
+        新しく脳波のデータを取得したときに、そのデータを区別できるような関数でなくてはなりません。<br>
+        手持ちのデータを最大限高精度に区別する関数を作ってしまうと、それは手持ちデータにおけるノイズや外れ値にも対応しようとしてしまいます。<br>
+        結果、ヘンテコな関数になってしまい、新しいデータを入力したときの区別精度が落ちてしまいます。<br>
+        この現象は 過学習（over-fitting）と呼ばれているので、詳しくはググってください。<br>
+      </p>
+        過学習を防ぐ工夫のひとつがK分割交差検証（k-fold cross-validation）です。<br>
+        まず、手持ちのデータをkセット（例えば5セット）へと、ランダムに分割します。<br>
+        そのうち1セットは脇においといて、残った4セットのデータのみを使って分類器（区別する関数）を作ります。<br>
+        分類機ができたら、脇においた1セットに対して、どのくらい精度よく分類できるかを算出します。<br>
+        脇に置いといたデータは分類器作成に用いていないので、「新しく取得してきたデータ」と実質的に同じです。<br>
+        つまり、その分類機が新規のデータに対してどのくらいの精度で分類をできるかが試算できるわけです。<br>
+        続いて、別の1セットを脇においてみて、また分類機の作成と、脇においた1セットを用いた精度検証を行います。<br>
+        これを、各セットを脇におく全パターンで試します（今回は5セットに分割したので5回検証を行います）。<br>
+        そしてそれぞれで得られた精度を平均して、最終的な分類機の精度とします。<br>
+      </p><p>
+        OpenViBEのP300 spellerは、自動で5分割して交差検証を行ってくれます。<br>
+        上記コマンドプロンプト表示されているのは、その結果です。
+      </p>
+    </section>
+    <section>
+      <h2>8. スペリング実践</h2>
+      <p>
+        いよいよ実践です。<br>
+        被験者が意識した文字を、機械が脳波から当てられるのか試してみましょう。<br>
+        p300-xdawn-4-online.xmlを開いて再生します。<br>
+        先ほどと同じアルファベット盤が出てきて、20秒立つとどれかひとつが青く光ります。<br>
+        青く指定された文字を見ていいのですが、せっかくなので被験者の好きな文字を見つめましょう。<br>
+        今回も文字が次々と光るので、ひとつの文字を見つめ続けます。<br>
+        しばらくすると、ひとつの文字が緑色で光ります。<br>
+        これが機械の判定した、「あなたが見つめていた文字」です。<br>
+        正解だったでしょうか。
+      </p>
+    </section>
+    <section>
+      <h2>9. xDAWNフィルタがうまく作れない場合</h2>
+      <p>
+        上述の通り、xDAWNフィルタの学習過程でエラーが出る場合があります。<br>
+        僕も今Spellerを実行しようとすると、必ずこのエラーに突き当たります。<br>
+        一回成功したはずだったんですが…。<br>
+        コマンドプロンプト画面を見てみると、<br>
+        Generalized eigen vector decomposition failed.<br>
+        なんてエラーメッセージが出ています。<br>
+        解決方法は見つかっていません。<br>
+        このエラーが毎回出てどうしようもない場合は、xDAWNフィルタの設計を諦めるのがひとつの手です。
+      </p><p>
+        上述のシナリオは [/bci_examples/p300-speller-xDAWN] に入っているものでした<br>
+        一方、[/bci_examples/p300-speller]というディレクトリも存在するかと思います。<br>
+        こちらは、xDAWNフィルタを使わずにスペリングをするためのシナリオ群です。<br>
+        トレーニングデータを集める段階までは同じ内容のようです。<br>
+        xDAWNフィルタに失敗したら、p300-speller-2-train-classifier.xmlを開きましょう<br>
+        （p300-xdawn-3-train-classifier.xmlの代わりとなります）。<br>
+        上から2番目にあるChannel Selectorのボックスをダブルクリックします。<br>
+        [Channel List]へ電極名を入力することで、推定に使う電極を選ぶことができます。<br>
+        初期設定は [Cz;O1;O2] となっています。<br>
+        HD-72の場合ですと、これを [FCCz;O1h;O2h] と書き換えれば動きます<br>
+        （別の電極を指定してももちろんOKなはずです）。
+      </p>
+        <img src="article_2/pic_4.PNG">
+      <p>
+        Generic stream readerにovファイルを指定することもお忘れなく。<br>
+        続いては、p300-speller-3-online.xmlを開きます<br>
+        （p300-xdawn-4-online.xmlの代わりです。）
+        先ほどと同じように、Channel Selectorのボックスから使用電極を指定します。<br>
+        そして再生すればうまくいくはずです。
+    <footer>
+      <hr>
+      <p>
+      トップページへ戻る：
+      <a href="../index.html">
+        川島一朔のHP</a>
+      </p>
+    </footer>
+    <script>prettyPrint();</script>
+  </body>
+</html>

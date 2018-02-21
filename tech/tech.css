@@ -28,3 +28,9 @@ h4{
 code{
   font-size: 18px;
 }
+footer{
+	text-align: center;
+}
+footer p{
+	margin: 36px 0 36px 0;
+}

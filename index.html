@@ -4,17 +4,22 @@
     <meta charset = "UTF-8">
     <meta name="description"
           content="川島一朔（研究者）のウェブサイト。臨床心理学に関わる問題に、脳波などの神経指標と、機械学習などの情報処理技術を用いてアプローチします。最近は、マインドフルネス瞑想がマインドワンダリングのどういった側面に働きかけているのかについて研究しています。">
-    <title> 川島一朔 </title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title> 川島一朔 </title>
     <link href = "css/common.css" rel = "stylesheet" type = "text/css" media = "all">
     <script src="./js/jquery-1.10.2.min.js"></script>
     <script type = "text/javascript" src="js/swingBtns.js"></script>
     <script type = "text/javascript" src="js/html-load.js"></script>
-    <script type="text/javascript">$(function(){$("#contents").load("top.html");});</script>
-
+    <script type = "text/javascript">
+      function load_top(){$("#contents").load("top.html");}
+      function load_profile(){$("#contents").load("profile.html");}
+      function load_tech(){$("#contents").load("tech.html");}
+      function openMenu(){$("#gnav_sp").slideToggle();}
+    </script>
   </head>
 
   <body>
-    <header>
+    <header id="forPC">
       <p>MENU ></p>
       <nav id = "gnav">
         <div id="btn_base">
@@ -29,23 +34,34 @@
       			<li><img src="./img/btn_mount_top.png"
                      width = 120 height = 120
                      class="btn" id="btn_mount_top"
-                     onclick=$(function(){$("#contents").load("top.html");}); onmouseover="liftUp_top();" onmouseout="fall_top()"></li>
+                     onclick=load_top(); onmouseover="liftUp_top();" onmouseout="fall_top()"></li>
       			<li><img src="./img/btn_mount_profile.png"
                      width = 120 height = 120
                      class="btn" id="btn_mount_profile"
-                     onclick=$(function(){$("#contents").load("profile.html");}); onmouseover="liftUp_profile();" onmouseout="fall_profile()"></li>
+                     onclick=load_profile(); onmouseover="liftUp_profile();" onmouseout="fall_profile()"></li>
             <li><img src="./img/btn_mount_tech.png"
                      width = 120 height = 120
                      class="btn" id="btn_mount_tech"
-                     onclick=$(function(){$("#contents").load("tech.html");}); onmouseover="liftUp_tech();" onmouseout="fall_tech()"></li>
+                     onclick=load_tech(); onmouseover="liftUp_tech();" onmouseout="fall_tech()"></li>
       		</ul>
         </div>
       </nav>
     </header>
+		<header id="forSP">
+			<p id="menuBtn"
+					onclick=openMenu();>
+				三</p>
+			<nav id = "gnav_sp">
+				<ul>
+					<li><p onclick="load_top(); openMenu()">TOP</p></li>
+					<li><p onclick="load_profile(); openMenu()">PROFILE</p></li>
+					<li><p onclick="load_tech(); openMenu()">TECH.</p></li>
+				</ul>
+			</nav>
+		</header>
     <div id = "contents">
-
     </div>
-  <!--
+
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -54,7 +70,8 @@
 
     ga('create', 'UA-105084972-1', 'auto');
     ga('send', 'pageview');
+    load_top();
   </script>
--->
+
   </body>
 </html>

@@ -1,3 +1,265 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.12.3 (455520)"/><meta name="altitude" content="76.30600738525391"/><meta name="author" content="川島一朔"/><meta name="created" content="2017-11-16 10:00:55 +0000"/><meta name="latitude" content="35.79083295894519"/><meta name="longitude" content="139.4560393607365"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2017-11-22 07:29:12 +0000"/><title>「Python機械学習プログラミング」第9章に挑む</title></head><body><div><span style="font-size: 18px; font-weight: bold;">「Python機械学習プログラミング」第9章に挑む</span></div><div><br/></div><div>環境：Windows10, Python 2.7, Python 3.6</div><div><br/></div><div><span style="font-weight: bold;">9.2 データストレージとしてSQLiteデータベースをセットアップする</span></div><div><br/></div><div>9.1 はさくっと終わらせて、こちらから。</div><div><br/></div><div>そもそもSQLiteってなんなのか。ググってみてもよくわからない。</div><div>下記URLが唯一理解可能だった。</div><div><a href="http://wa3.i-3-i.info/word11778.html">http://wa3.i-3-i.info/word11778.html</a></div><div><br/></div><div><span style="font-size: 9pt;" title="Page 280"><span style="font-size: 9pt; font-family: HiraKakuProN; font-style: italic;">ここでは、Webアプリケーションの予測に対するユーザーからのフィードバックを収集する。そのために、単純なSQLiteデータベースをセットアップする。</span></span></div><div><br/></div><div>つまり、WEBページにコメント送信フォームみたいなのをつけたとき、その送信されたデータをSQLiteっていうデータベースに保存する的な話かな。</div><div><br/></div><div>さっそくひとつめのコードを見てみる。</div><div><br/></div><div>import sqlite3</div><div>import os</div><div>if os.path.exists('reviews.sqlite'):</div><div>    os.remove('reviews.sqlite')</div><div><br/></div><div>↑カレントディレクトリにreviews.sqliteがあったら消しておく</div><div><br/></div><div>conn = sqlite3.connect('reviews.sqlite')</div><div><br/></div><div>↑reviews.sqliteというファイルを開く。</div><div> カレントディレクトリに該当ファイルがない場合、新規作成する。</div><div><br/></div><div>c = conn.cursor()</div><div><br/></div><div>↑reviews.sqliteをもとに、cursorって種類のインスタンスを作る。</div><div><br/></div><div>c.execute('CREATE TABLE review_db (review TEXT, sentiment INTEGER, date TEXT)')</div><div><br/></div><div>↑「インスタンス c の中に、レビューデータベースのテーブルを作れ。</div><div>テーブルの名前は review_db な。</div><div>テーブルの内容は、reviewって名前のテキスト列と、sentiment（感情）って名前の整数列と、dateって名前のテキスト列で。」</div><div><br/></div><div>example1 = 'I love this movie'</div><div><br/></div><div>↑後に、この文章の感情価を推定するのかな。</div><div><br/></div><div>c.execute("INSERT INTO review_db (review, sentiment, date) VALUES (?, ?, DATETIME('now'))", (example1, 1))</div><div><br/></div><div>↑見慣れない形式だ。?て。</div><div>VALUESの中に?を使った場合は、第二引数にタプル形式で?の中身を指定するらしい。</div><div>さっき作ったreview_dbに、情報を加えろ。</div><div>review, sentiment, dateの列に追加するぞ。</div><div>値は順に、?、?、現在日時。</div><div>?にはexample1と1を入れろ。」</div><div><br/></div><div>example2 = 'I disliked this movie'</div><div><br/></div><div>↑この文章も後で推定するのかな。</div><div><br/></div><div>c.execute("INSERT INTO review_db (review, sentiment, date) VALUES (?, ?, DATETIME('now'))", (example2, 0))</div><div><br/></div><div>↑さっきと同じようにexample2をreview_dbに追加。sentimentの値は、0で。</div><div><br/></div><div>conn.commit()</div><div><br/></div><div>↑データベースに追加・削除をした後にはこれをやって変更を保存するらしい。</div><div>これで、reviews.sqliteの中にはexample1とexample2という2つのデータが保存されたわけだ。</div><div><br/></div><div>conn.close()</div><div><br/></div><div>↑ファイルを閉じる。</div><div><br/></div><div>次のコードは、revies.sqliteの中身を覗いてみるためのもの。</div><div><br/></div><div>conn = sqlite3.connect('reviews.sqlite')</div><div>c = conn.cursor()</div><div>c.execute("SELECT * FROM review_db WHERE date BETWEEN '2015-01-01 10:10:10' AND DATETIME('now')")</div><div><br/></div><div>↑「c の中の review_db から選択しろ。</div><div>ただし、date列が2015年元旦から現在までのやつな。」</div><div>選択て。独特だ。</div><div>イメージとしては、エクセル開いて行を選択してる感じなのかな。</div><div>マクロ書いてるみたい。</div><div><br/></div><div>results = c.fetchall()</div><div><br/></div><div>↑c の中で選択したすべての行を取得する。</div><div><br/></div><div>conn.close()</div><div><br/></div><div><span style="line-height: 1.45;">resultsの中身を見てみる。</span></div><div><br/></div><div>[(u'I love this movie', 1, u'2017-11-19 05:53:00'),</div><div>(u'I disliked this movie', 0, u'2017-11-19 05:53:00')]</div><div><br/></div><div>うまくいってる。</div><div><br/></div><div>SQLite Manager はいつか試しましょう。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">9.3 Flaskを使ってWebアプリケーションを開発する</span></div><div><br/></div><div><span style="line-height: 1.45;">Flaskとは、Webアプリケーションフレームワークのひとつだという。</span></div><div><span style="line-height: 1.45;">Webアプリを作るための関数集？みたいな？</span></div><div>Wikipediaにはこんなことが書いてあった</div><div><br/></div><div><span style="font-style: italic;">FlaskはArmin Ronacherによって開発された。彼は『エイプリルフールのジョークとして作ったのだけれど、有名になって、いつのまにか本格的なアプリケーションになってしまった』と述べている。</span></div><div><br/></div><div>さっそく flask を pip でインストール。</div><div>一旦 Python を 終了させて、コマンドプロンプト上で pip install flask。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">9.3.1 はじめての Flask Web アプリケーション</span></div><div>1st_flask_app_1というフォルダを作る。</div><div>その中にapp.pyってファイルとtemplatesってフォルダを作る。</div><div>templatesってフォルダの中に、first_app.htmlってファイルを作る。</div><div><br/></div><div>app.pyの中身は下記</div><div><br/></div><div>from flask import Flask, render_template</div><div><span style="line-height: 1.45;">app = Flask(__name__)</span></div><div><br/></div><div><span style="line-height: 1.45;">↑__name__って引数には、直接 py ファイルが実行されると '__main__' という文字列が代入される。</span></div><div><span style="line-height: 1.45;">モジュールとしてimportされると、__name__ にはそのモジュール名（app.py だったら、'app'）が代入される。</span></div><div><span style="font-style: italic;">__name__という引数で初期化することで、HTMLテンプレートフォルダ（templates）がこのモジュールと同じフォルダで見つかることをFLaskに知らせている。</span></div><div>とあるが、どうしてそんな動きになるんだろう。</div><div><br/></div><div>@app.route('/')</div><div>def index():</div><div>    return render_template('first_app.html')</div><div><br/></div><div>↑特定のディレクトリ（'/'の場合だと、py ファイルと同じ場所）にアクセスがあったら index() を実行するって意味になるらしい。</div><div>@マークを使ったデコレーターってのは関数の内容をちょっと変える時に使うものだとか。</div><div>ルートデコレーターってのはちょっと違うものなのか…？</div><div><br/></div><div>if __name__ == '__main__':</div><div>    app.run(debug=True)</div><div><br/></div><div>↑直接 py ファイルが呼び出されたときには、appインスタンスを run させる。</div><div>run って function は、http://127.0.0.1:5000/ みたいなローカルサーバーアドレスを作成するためのもの？</div><div>実際にWEBアプリケーションとして外部から実行する際はローカルのアドレスを作る必要がなくて、そういうときは __name__ == '__main__' にならない…ってこと？違う気がする。</div><div><br/></div><div>first_app.html には、大したこと書いてないな。</div><div>一文表示するだけ。</div><div><br/></div><div>ターミナル（コマンドプロンプト）画面に python app.py と打つと、教科書通りにローカルアドレスが出てくる。</div><div>WEBブラウザに入力すると Hello World 的な一文を拝める。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">9.3.2 はじめての Flask Web アプリケーション</span></div><div><br/></div><div>pip install wtforms で問題なくインストール。</div><div>1st_flask_app_2 というフォルダを新規作成。</div><div>その中にさっきの app.py と template フォルダ（中身ごと）をコピー。</div><div>さらに、static フォルダを新規作成。</div><div>templateフォルダ内に _formhelpers.html と hello.html を作成</div><div><br/></div><div>app.py ファイルを下記の通りに書き換える</div><div><br/></div><div>from flask import Flask, render_template, request</div><div>from wtforms import Form, TextAreaField, validators</div><div>app = Flask(__name__)</div><div><br/></div><div>class HelloForm(Form):</div><div>    sayhello = TextAreaField('',[validators.DataRequired()])</div><div><br/></div><div>↑<span style="line-height: 1.45;">Form を引数にしているが、class の中で使ってないのがよくわからん。</span></div><div><span style="line-height: 1.45;">varidators は、wtform からインポートされているモジュールで、その中のDataRequired() って関数（クラスらしい）を呼んでいる。</span></div><div><span style="line-height: 1.45;">たぶん、DataRequired() が Form を参照するのかな。</span></div><div>クラスの名前は大文字にするっていう慣習があるらしいから、<span style="line-height: 1.45;">TextAreaField もクラスなんだろう。</span></div><div>HelloForm で作ったインスタンスの中には sayhello っていうクラス変数ができて、sayhello もインスタンス。</div><div>クラス変数ってのはインスタンス変数と違って、クラスそのものが持つ変数。</div><div>なのでクラス変数を変更すると、次にそのクラスから作ったインスタンスに影響する…って理解でいいのだろうか。</div><div>するとこのクラスで作ったインスタンスは空っぽでは？</div><div><br/></div><div>@app.route('/')</div><div>def index():</div><div>    form = HelloForm(request.form)</div><div>    return render_template('first_app.html', form=form)</div><div><br/></div><div><span style="line-height: 1.45;">↑app.py があるディレクトリにアクセスがあったら、index() を実行。</span></div><div>form ってインスタンスの中身はなんなだろう。</div><div>request.form というのも、何を意味しているのか。</div><div><br/></div><div>@app.route('/hello', methods=['POST'])</div><div><br/></div><div><span style="line-height: 1.45;">↑app.py があるディレクトリの下にある、hello ってディレクトリにアクセスがあったら hello() を実行？</span></div><div>hello なんてフォルダないけど。</div><div>実際になくても、そこにアクセスしようとする動きがあればいいのかな。</div><div>hello.html のことじゃないもんね？</div><div><span style="line-height: 1.45;">二つ目 method=['POST'] てのはなんなんだ。</span></div><div><span style="line-height: 1.45;">後のコードから見て、request.method っていう変数に 'POST' を代入しているのか。</span></div><div><br/></div><div>def hello():</div><div>    form = HelloForm(request.form)</div><div>    if request.method == 'POST' and form.validate():</div><div><br/></div><div>↑上の方で method=['POST'] って書いたのがここで効く？</div><div>.validate() というのは form のインスタンスメソッド？</div><div>フォームにちゃんと入力があれば True を返してくれるんだろうけど。</div><div>どこで form に機能を持たせているのかわからん。</div><div><br/></div><div>        name = request.form['sayhello']</div><div>        return render_template('hello.html', name=name)</div><div><br/></div><div>↑form の中の sayhello っていうクラス変数に大して、request をかけると、フォームの中身が name に格納される？</div><div><span style="line-height: 1.45;">レンダリングってのは、HTMLやCSSスクリプトを読み取って、WEBページを表示すること。</span></div><div>つまり、hello.html を表示するということ。</div><div>ただし、hello.html のうち name って変数に name の中身（フォームの中身）を渡している。</div><div><br/></div><div>    return render_template('first_app.html', form=form)</div><div><br/></div><div>↑form.validate() がFalseだと、first_app.html を表示する。</div><div><br/></div><div>if __name__ == '__main__':</div><div>    app.run(debug=True)</div><div><br/></div><div>この辺、Python の基礎知識が足りてない気がする…</div><div><br/></div><div>次は _formhelpers.html。</div><div>Jinja2 という言語で書かれているとか。</div><div>なにをしてるのか全然わからないので勘弁してください。</div><div><br/></div><div>次いで、style.css。<span style="line-height: 1.45;">これはシンプル。</span></div><div>WEBページの内容を書き込むのがHTMLで、そのHTMLの見た目を修飾するのがCSS。</div><div><br/></div><div>first_app.html のコードを下記のように直す（なぜか ch09.pynb にない？）。</div><div><br/></div><div>&lt;!doctype html&gt;</div><div>&lt;html&gt;</div><div>  &lt;head&gt;</div><div>    &lt;title&gt;First app&lt;/title&gt;</div><div>    &lt;link rel="stylesheet"</div><div>          href="{{ url_for('static', filename='style.css')}}"&gt;</div><div>  &lt;/head&gt;</div><div>  &lt;body&gt;</div><div>  {% from "_formhelpers.html" import render_field %}</div><div><br/></div><div>↑Jinja2で書いたコードのうち、render_field てのを呼び出しているようだ。</div><div><br/></div><div>  &lt;div&gt;</div><div>    なまえを　いれてください</div><div>  &lt;/div&gt;</div><div>  &lt;form method=post action="/hello"&gt;</div><div>    &lt;dl&gt;</div><div>      {{ render_field(form.sayhello) }}</div><div>    &lt;/dl&gt;</div><div>    &lt;input type=submit value='おわり' name='submit_btn'&gt;</div><div>  &lt;/form&gt;</div><div>&lt;/body&gt;</div><div>&lt;/html&gt;</div><div><br/></div><div>↑app.py で出てきた変数名がちらほら。</div><div>このHTMLで定義した変数を、app.py は読み込んでいるのか？</div><div>formタグのうち、action="URI" は、送信先プログラムのURIを指定している、らしい。</div><div>URIてのはURLみたいなもの、正確にはURLもURIの一種、というだけの理解でいいだろうか。</div><div>とにかくこれで、/hello っていう架空のディレクトリ？にアクセスしている。</div><div>method="HTTPメソッド" は、送信の際の転送方法を指定している、らしい。</div><div><br/></div><div>hello.html の中身は下記</div><div><br/></div><div>&lt;!doctype html&gt;</div><div>&lt;html&gt;</div><div>  &lt;head&gt;</div><div>    &lt;title&gt;First app&lt;/title&gt;</div><div>    &lt;link rel="stylesheet"</div><div>          href="{{ url_for('static', filename='style.css')}}"&gt;</div><div>  &lt;/head&gt;</div><div>  &lt;body&gt;</div><div>    &lt;div&gt;</div><div>    おお {{ name }}！&lt;br&gt;</div><div>    ゆうしゃロトの　ちをひくものよ！&lt;br&gt;</div><div>    そなたのくるのをまっておったぞ。</div><div>    &lt;/div&gt;</div><div>  &lt;/body&gt;</div><div>&lt;/html&gt;</div><div><br/></div><div><br/></div><div>↑{{ name }}という書き方で、プレースホルダを作れるようだ。</div><div><br/></div><div>実行。ローカルアドレスを入力すると、下記のエラーメッセージ。</div><div><br/></div><div>jinja2.exceptions.UndefinedError</div><div>UndefinedError: 'form' is undefined</div><div><br/></div><div>単純に app.py が変更されていないだけだった。</div><div>再度変更すると成功。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">9.4 映画レビュー分類器をWebアプリケーションとして実装する</span></div><div><br/></div><div><span style="line-height: 1.45;">ここからが本番。</span></div><div>しかし新しいことはない様子なので、結果だけ見て省略してしまおう。</div><div>実行してみると、 pickle の load にエラーを起こしている。</div><div>Python 3 で漬け込んだ pickle は Python 2 でロードできないそうだ。</div><div>Python 3 から漬け込むときに、</div><div><br/></div><div>pickle.dump(～, protocol=2)</div><div><br/></div><div>とすればいいらしい。</div><div>今回はPython 3.6をインストールしてやりなおし。</div><div><br/></div><div>WEBアプリの起動と予測自体はうまくいったが、correct を押すとエラーになる。</div><div>Incorrect でも同様。</div><div>SGDClassifier object has no attribute 'max_iter'</div><div><br/></div><div><a href="https://www.pythonanywhere.com/forums/topic/11716/">https://www.pythonanywhere.com/forums/topic/11716/</a></div><div>↑でも同様のエラーが報告されている。</div><div><br/></div><div>pip3.6 install --user --upgrade scikit-learn==0.19.0</div><div>とやれば直るよ！と書いてあるように見えるが、pip3.6なんてものはないと言われる。</div><div>ググってもpip3.6というものの正体がわからない。</div><div><br/></div><div>とにかくscikit-learnのバージョンが悪いのかと考え、古いVerをインストールすることに。</div><div>py -3 -m pip install scikit-learn==0.18.0とうつと、</div><div>Visual C++ 14.0が必要と言われる。</div><div><a style="line-height: 1.45;" href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017">https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017</a></div><div>↑からBuild Toolsをインストール。</div><div>PCを再起動させ、再度py -3 -m pip install scikit-learn==0.18.0。</div><div>インストールはうまくいく。</div><div><br/></div><div>再度app.py を起動させてcorrectを押すと、問題なく Thank you のページが表示される。</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">9.5 WebアプリケーションをパブリックWebサーバーにデプロイする</span></div><div><br/></div><div>教科書通り、PythonAnywhereのアカウントを取得する。</div><div>さらに教科書通りにWebアプリケーションの作成を進めていく。</div><div>[Add a new web app] ボタンをクリックすると、Create new web appというダイアログが出る。</div><div>まず、domain nameについて出て来るが、無料だとそのままNextを押す他ないようだ。</div><div>FlaskとPython3.6を選ぶ。</div><div>なにやらPathを指定しろと出てくる。</div><div>mysite/flask_app.pyとなっているのをmovieclassifier/app.pyに変えてNext。</div><div>メニュー左のDirectoriesから、mysite/をクリックし、</div><div>Files タブからUpload a file をクリック。</div><div>ひとつずつしかファイルをアップできないが、ひとつずつやれということだろうか。</div><div>頑張ってひとつずつアップ。</div><div>教科書通りにReloadを行い、<a href="http://issakuss.pythonanywher.com">http://issakuss.pythonanywhere.com</a> にアクセス。</div><div><br/></div><div>うまくいった！</div><div><br/></div><div><br/></div><div><span style="font-weight: bold;">9.5.1 映画レビュー分類器を更新する</span></div><div><span style="font-weight: bold;"><br/></span></div><div>app.py と同じディレクトリに update.py を作成。</div><div>中身はこちら↓</div><div><br/></div><div>import pickle</div><div>import sqlite3</div><div>import numpy as np</div><div>import os</div><div><br/></div><div># import HashingVectorizer from local dir</div><div>from vectorizer import vect</div><div><br/></div><div>def update_model(db_path, model, batch_size=10000):</div><div>    conn = sqlite3.connect(db_path)</div><div>    c = conn.cursor()</div><div>    c.execute('SELECT * from review_db')</div><div>    results = c.fetchmany(batch_size)</div><div><br/></div><div>↑変数 results に、SQLite のデータのうち10000個（行）を代入。</div><div><br/></div><div>    while results:</div><div><br/></div><div>↑resultsの中身が空になるまで実行。</div><div><br/></div><div>        data = np.array(results)</div><div>        X = data[:, 0]</div><div>        y = data[:, 1].astype(int)</div><div><br/></div><div>↑Xに予測子、Yに教師信号を代入</div><div><br/></div><div>        classes = np.array([0, 1])</div><div>        X_train = vect.transform(X)</div><div>        model.partial_fit(X_train, y, classes=classes)</div><div><br/></div><div>↑学習実行。partial_fitという関数で、データの一部だけでとりあえず学習ということができるようだ。</div><div><br/></div><div>        results = c.fetchmany(batch_size)</div><div><br/></div><div>↑次の1万個を results に入れて、while 構文内をもう一周。</div><div><br/></div><div>    conn.close()</div><div>    return model</div><div><br/></div><div>cur_dir = os.path.dirname(__file__)</div><div><br/></div><div>clf = pickle.load(open(os.path.join(cur_dir,</div><div>                  'pkl_objects',</div><div>                  'classifier.pkl'), 'rb'))</div><div>db = os.path.join(cur_dir, 'reviews.sqlite')</div><div><br/></div><div>clf = update_model(db_path=db, model=clf, batch_size=10000)</div><div><br/></div><div>pickle.dump(clf, open(os.path.join(cur_dir,<br/></div><div>       <span>    </span> 　     'pkl_objects', 'classifier.pkl'), 'wb')</div><div><span>    <span>    </span></span>            , protocol=4)</div><div><br/></div><div>app.py の冒頭に、インポートのための一文を入れる↓</div><div>from update import update_model</div><div><br/></div><div>さらにapp.pyの最後に、下記のコードを入れる。</div><div>if __name__ == '__main__':</div><div><span>    clf = update_model(dp_path=db, model=clf, batch_size=10000)</span><br/></div><div><span><br/></span></div><div>お手本コードだとapp.pyが編集されていないようにみえる。</div><div>これであってるのだろうか。</div><div>教科書には三点ドットが書いてあるけれど、これは必要ないよな…？</div><div><br/></div><div>Pythonanywhere に update.py をアップロード。</div><div><br/></div><div>うまくいったか試してみよう。</div><div>試しに、データベースにないであろう語を使った文章を入れてみる。</div><div>ということで、Om Mani Padme Hum と書いてsubmit。</div><div>判定結果はPositiveで、自信は51.63%だという。</div><div>「一応 Positive にしたけど訳分からん」といった様子だ（全くもって正しい）。</div><div>これに対して、Correct を押してやる。</div><div>もう一度 Om Mani Padme Hum と書いてsubmitすると、今度は54.01%の自信をもって返ってきた。</div><div>何度か繰り返すと、72.27%の自信でCorrectと返すようにまでなった。</div><div>チベット仏教のマントラは、映画を褒める言葉として機械に認識されたようだ。</div><div><br/></div></body></html>
+<!DOCTYPE html>
+<html lang = "ja">
+  <head>
+    <meta charset = "UTF-8">
+    <meta name="description">
+    <title>TECH_NOTES (Issaku Kawashima)</title>
+    <link href = "prettify.css" rel = "stylesheet" type = "text/css" media = "all">
+    <link href = "tech.css" rel = "stylesheet" type = "text/css" media = "all">
+    <script src="js/prettify.js"></script>
+    <script src="js/lang-matlab.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>ドライ電極脳波計HD-72を使う</h1>
+      <p>
+        執筆日：2018年2月3日<br>
+        環境：Windows10
+      </p>
+    </header>
+    <section>
+      <h2>1. HD-72の概要</h2>
+      <p>
+        <a href="http://cognionics.com/index.php/products/hd-eeg-systems/72-channel-system">
+          Cognionics製 HD-72</a>は、64個のドライ電極を手軽に装着できる脳波計です。<br>
+        無線（Bluetooth）でPCへデータを飛ばすので、被験者の拘束が少なく済みます。<br>
+        なので、運動中の脳波測定にも向いているようです（アーティファクトの処理が大変そうですが）。<br>
+        ただし、頭の大きさによって電極の配置が微妙に異なってしまうようです。<br>
+        精密な測定を要する基礎研究よりも、ニューロフィードバックなどの応用に向いているのかと思います。<br>
+        お値段はざっくり、車一台買えるくらいのイメージです。
+      </p>
+        <img src="article_1/pic_1.JPG">
+      <p>
+        HD-72ひとセット<br>
+        持ち運んだりする際は、電極同士が接触して摩耗しないよう綿を挟んでいます。<br>
+				3Dプリンタで作ったような質感（らしい）のプラスチックです。
+      </p>
+        <img src="article_1/pic_2.JPG">
+        <img src="article_1/pic_3.JPG">
+      <p>
+        付属品がいくつか。<br>
+        電極を掃除するためのブラシ（電動）。<br>
+        バッテリーと充電器。
+      </p>
+      <p>
+        ドライ電極とは、電極と皮膚の間の通電性を良くするために、ペーストや電解液などを頭皮に付ける必要がないものです。<br>
+        普通の電極であればノイズを拾いまくってしまって測定になりません。<br>
+        しかし、HD-72に搭載されているようなドライ電極は、アクティブ電極と呼ばれる仕組みによりノイズを軽減しています。<br>
+        これは、電極ひとつひとつにアンプを内蔵し、拾った脳波にノイズが混入する前に増幅するもの、だそうです。<br>
+      </p>
+        <img src="article_1/pic_4.JPG">
+      <p>
+        裏側はこんなふうになっています。
+      </p>
+        <img src="article_1/pic_5.JPG">
+      <p>
+        ひとつひとつの電極はボタンでくっついており、簡単に外れ（てしまい）ます。<br>
+        このタコ足のどれか一脚が頭皮に接触していれば、その電極の脳波を取得できるとか。
+      </p>
+        <img src="article_1/pic_6.JPG">
+      <p>
+        フラットな電極も付属していて、付替えが可能です。<br>
+        額の部分なんかには、これを使ってもよいようです。
+      </p>
+        <img src="article_1/pic_7.JPG">
+        <img src="article_1/pic_8.JPG">
+      <p>
+        後ろ側にバッテリーや送信機がついています。<br>
+        ３次元の加速度計も内蔵されています。<br>
+        電源スイッチもここです。<br>
+        結構柔らかいスイッチで、装着しているうちにいつのまにかオフになってたりしがちです。<br>
+      </p>
+        <img src="article_1/pic_9.JPG">
+      <p>
+        受信機はUSBでPCに挿します。
+      </p>
+    </section>
+    <section>
+      <h2>2. HD-72とデータ取得ソフトウェアの接続</h2>
+      <p>
+        HD-72を始めとするCognionics製品は、Cognionics Data Acquisition.exeというソフトで制御します。<br>
+        ソフトは
+        <a href="http://cognionics.com/wiki/pmwiki.php/Main/DataAcquisitionSoftware">
+          ここ
+        </a>
+        からダウンロードできます。<br>
+        ソフトを開くと、右側のメニューに装置名が表示されます。
+      </p>
+        <img src="article_1/pic_10.PNG">
+			<aside class="ts">
+				<h4>TROUBLE SHOOTING: [ftd2xx.dll]が無い的なエラーが表示される</h4>
+				<p>
+					デバイスマネージャーを確認してください。<br>
+					挿した受信機がうまく認識されていない可能性があります。<br>
+					該当デバイスのプロパティを開いて、[ドライバーの更新]→[ドライバーソフトウェアの最新版を自動検索]をしてください<br>
+					その後ソフトを再起動すると解決するかもしれません。
+				</p>
+			</aside>
+			<p>
+        クリックして[Connection]を選び、少し待ちます。<br>
+        [Attempt to Auto-Configure?]のメッセージに[はい]と答えます。<br>
+        少し（5秒くらい？）時間がかかりますが、デバイス設定画面が出てきます。
+      </p>
+        <img src="article_1/pic_11.PNG">
+      <p>
+        Sample Rateはここで変えましょう。<br>
+        ただし、サポートされているRateは500までだそうです（代理店営業の方曰く）<br>
+        1000Hzで起動させたところ、謎のスパイクノイズと謎のトリガが入るバグが生じました。<br>
+        一覧表示された電極名をクリックすると、その電極の測定のオン・オフを切り替えられます。<br>
+        [Write to Device and Start]をクリックします。<br>
+        画面左側にグラフが表示されればOKです。
+      </p>
+        <img src="article_1/pic_12.PNG">
+      <p>
+        こんな感じに。<br>
+				今はまだ脳波計をつけてないので、その辺の電波を拾っているだけです。
+      </p>
+    <section>
+      <h2>2. HD-72の装着</h2>
+      <p>
+        ざっくりかぶせます。
+      </p>
+        <img src="article_1/pic_13.JPG">
+      <p>
+        あらかじめCz（あるいは重要な電極）の位置を測っておいて、そこに合わせるのがいいかと思います。<br>
+        が、いずれにせよ装着位置はざっくりになってしまいそうです。<br>
+        左右くらいはまっすぐになるように調整しましょう。
+      </p><p>
+        あご紐を締めます。
+      </p>
+        <img src="article_1/pic_14.JPG">
+        <img src="article_1/pic_15.JPG">
+      <p>
+        留め具部分は、スライドして噛ませるようになっています。
+      </p>
+      <p>
+        ベルトを締めていきます。
+      </p>
+        <img src="article_1/pic_16.JPG">
+        <img src="article_1/pic_17.JPG">
+      <p>
+        各ネジの横についているボタンが飛び出ている状態であることを確認します。<br>
+        ボタンが引っ込んでいる状態の場合は、飛び出た状態にします。<br>
+        ネジを下にスライドさせるか、時計方向に回すとボタンが飛び出ます。<br>
+        この状態で、ネジを時計回りに巻きます。<br>
+        これによってベルトが巻き取られ、締められていきます。<br>
+        全体を均等に締めて、すべての電極が頭皮に接触するようにしましょう。<br>
+        ちなみに手元にあるこのHD-72は、何故か一部のボタンが固いようです。<br>
+        結構ガチャガチャとネジを動かしてようやくボタンが出てきます。
+      </p>
+      <p>
+        グラウンドとリファレンスを左右の耳たぶにクリップでつければ完成です。
+      </p>
+        <img src="article_1/pic_18.JPG">
+        <img src="article_1/pic_19.JPG">
+      <p>
+        電極が刺さるような感じもなく、それほどは重くもなく、意外に装着ストレスは少ないです（個人の感想）。
+      </p>
+    </section>
+    <section>
+      <h2>3. データ取得ソフトウェアを使用する</h2>
+      <p>
+        きちんと装着ができると、データ取得ソフトに脳波が表示されます。<br>
+			</p>
+				<img src="article_1/pic_20.PNG">
+			<p>
+        Displayタブにある[Record]を押すと、その時からの脳波を記録することができます（上記画像はDeviceタブ）。<br>
+        簡易に測定をするならこれで十分でしょう。<br>
+        [Start LabStreamingLayer]をクリックすると、別のPCに脳波のデータを送ることができます。<br>
+        これが結構便利なのです。
+      </p><p>
+        メニューのうち[Display]タブからは、脳波の表示設定を変えることができます。<br>
+        初期設定だと64本の波形が1ページに表示されていてわかりにくいです。<br>
+        [Channel: All/pages]となっているのをクリックして、[8/pages]あたりに設定しましょう。<br>
+        また、縦軸のスケールを示す[Scale(EEG):]も200μVくらいにするのがわかりやすいかと思います。<br>
+				Mask Hi-Z ChannelsのThresholdを超える電気抵抗の電極波形は表示されません。
+      </p><p>
+        [Channels]タブから、各電極の電気抵抗を確認することができます。<br>
+        右下の三角マークをクリックすると別ウィンドウに拡大することもできます。
+      </p>
+    </section>
+    <section>
+      <h2>4. 測定の精度を高める</h2>
+      <p>
+        ソフトウェアで脳波や電気抵抗を確認しながら電極の接触具合を調整します。<br>
+        まず、[Display]タブから電気抵抗値を確認しましょう。<br>
+				右下の三角形をクリックすると、拡大表示も可能です
+			</p>
+				<img src="article_1/pic_21.PNG">
+				<img src="article_1/pic_22.PNG">
+			<p>
+        赤く表示されている電極は電気抵抗が高く、緑は低いことを示しています。<br>
+        レッドになっている電極の接触を再確認しましょう。<br>
+        髪の毛を耳かきのような棒でかき出したり、ベルトをより強く締めたり、電極をグリグリしたりします。<br>
+        すべてグリーンになれば最良です。<br>
+        しかし、必ずしもそうする必要はないとのことです（営業さん曰く）。<br>
+        最終的には、脳波形を目視してイケるかどうか確認してほしいとのことです（営業さん曰く）。
+			</p>
+				<img src="article_1/pic_23.PNG">
+				<img src="article_1/pic_24.PNG">
+			<p>
+        線が太く見える（左）のは、部屋の電源から発生する50Hz（関西だと60Hz）のハムノイズが乗っているためです。<br>
+        太線だったり、線が上下に飛び跳ねている電極は調整しましょう。<br>
+        さらに、下記3点を確認してみましょう。<br>
+        ・まばたきをすると、スパイク状のアーティファクトが入る<br>
+        ・食いしばりをすると、ノイズが入る（線が極太になる）<br>
+        ・目を閉じると、α波が出現する。<br>
+      </p><p>
+        α波とは、脳波のうち大体8-13Hzの、ゆったりとした周波成分を指します。<br>
+        リラックスすると出現する脳波として有名で、目を閉じると、特に後頭に見られます。<br>
+        脳波のギザギザが、なんというか、ゆるやかになればそれがα波だそうです。<br>
+        目を開けている時と閉じている時とで、ギザギザの間隔が変わらないか見てみましょう。<br>
+        ただこのα波は、はっきり現れる人と現れないい人がいるそうです。
+			</p>
+				<img src="article_1/pic_25.PNG">
+      <p>
+				これは、かなりはっきりと出るらしい人のα波です。<br>
+				目を閉じてる区間の脳波が、開いている時の区間のものと違うことがなんとなくわかります。
+			</p>
+        波形が全体的にいい感じになれば準備はOKです。<br>
+		</section>
+		<section>
+      <h2>4. HD-72を取り外す</h2>
+      <p>
+				測定が終わったら脳波計を外しましょう。<br>
+				耳たぶに挟んだクリップを外し、顎ひもを外し、脳波計を上に持ち上げればそれで外れます。<br>
+			</p><p>
+				次の測定のために、巻き取ったベルトを緩めておきましょう。<br>
+				先程ベルトを締めるために使ったネジを上へスライドさせ、ボタンを押します。<br>
+				すると、ボタンが引っ込んだ状態になるので、これで緩めることができます。<br>
+				緩める時には、（なんと）手でベルトを引っ張り出します。
+			</p>
+				<img src="article_1/pic_26.jpeg">
+			<p>
+				ちょっとドキドキするほど強めに引っ張ります。<br>
+				すると、カラカラと音を出しながら巻き取られたベルトが戻ります。<br>
+				注意点として、ネジと反対側の、ベルトが付着している部分に力がかからないようにしましょう。<br>
+				引っこ抜けてしまうことがあるようです。<br>
+			</p>
+				<img src="article_1/pic_27.jpeg">
+			<p>
+				やらかした<br>
+        （代理店の方がさっと直してくださいました）
+			</p>
+		<section>
+			<p>
+				以上、HD-72を使うための基礎知識でした。<br>
+        別の記事に、MATLABやOpenVibeというソフトでデータ取得を制御する記事を書いています。<br>
+        そちらもどうぞ。<br>
+      </p>
+      <ul>
+        <li><a href="./article_3.html">LabStreamingLayerで脳波データをMATLABへ飛ばす</a></li>
+        <li><a href="./article_2.html">Open ViBEでP300 Speller を実践する</a></li>
+      </ul>
+    </section>
+    <footer>
+      <hr>
+      <p>
+      トップページへ戻る：
+      <a href="../index.html">
+        川島一朔のHP</a>
+      </p>
+    </footer>
+    <script>prettyPrint();</script>
+  </body>
+</html>
