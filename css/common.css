@@ -29,9 +29,6 @@ li{
   margin-left: 180px;
 }
 @media screen and (max-width: 479px){
-	#contents{
-		margin-left: 48px;
-	}
 	#forPC{
 		display: none;
 	}
@@ -39,8 +36,12 @@ li{
     text-align: right;
     display: inherit;
 		position: fixed;
-    padding-top: 36px;
+    padding-top: 12px;
     width: 100%;
+	}
+  #contents{
+    padding-top: 64px;
+		margin-left: 48px;
 	}
   #menuBtn{
     font-size: 36px;

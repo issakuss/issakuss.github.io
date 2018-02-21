@@ -33,4 +33,7 @@ cite{
   #lnav{
     display: none;
   }
+  #affiliation{
+    padding-top: 0px;
+  }
 }

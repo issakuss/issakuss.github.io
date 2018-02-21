@@ -22,3 +22,9 @@ a:hover{
 #tech_menu li {
   margin-top: 2em;
 }
+
+@media screen and (max-width: 479px){
+  #tech_nav{
+    padding-top: 0;
+  }
+}

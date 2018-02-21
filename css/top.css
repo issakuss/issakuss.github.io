@@ -47,7 +47,13 @@
     display: none;
   }
   #con_grt{
+    width: 100vh;
     margin-top: 12px;
-    margin-left: 32px;
+  }
+  #con_grt h1{
+    font-size: 24px;
+  }
+  #v{
+    width: 60px;
   }
 }
