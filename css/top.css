@@ -46,4 +46,7 @@
   #con_link{
     display: none;
   }
+  #con_grt{
+    margin-top: 0;
+  }
 }

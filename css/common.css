@@ -30,7 +30,7 @@ li{
 }
 @media screen and (max-width: 479px){
 	#contents{
-		margin-left: 0px;
+		margin-left: 48px;
 	}
 	#forPC{
 		display: none;
