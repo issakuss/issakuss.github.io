@@ -44,7 +44,7 @@
       </p><p>
           PsychoPy には、Builder と呼ばれる機能もあります。<br>
         </p>
-          <img src="article_5/pic_1.gif">
+          <img src="article_5/pic_2.jpg">
         <p>
           GUI を使って、マウスでカチカチすれば心理課題が作れるというものです。<br>
           E-Prime といったソフトと同じ感覚で使えます。
@@ -69,21 +69,15 @@
         まず、Python そのものをインストールします。<br>
         様々な便利ライブラリを楽に導入してくれるAnacondaを使用します<br>
         2018年5月30日現在、公式ページにはversion 3.x is not supported yet とあります。<br>
-        ので、version 2.7 をインストールします。<br>
-        ver 2.7 をでも試してみましたが、やはり途中で詰みました。
+        ので、Anaconda version 2.7 をインストールします。<br>
+        ver 3.x でも試してみましたが、やはり途中で詰みました。
       </p><p>
-        コマンドプロンプトを開き、python と入力してエンター。<br>
-        Python インタープリターが起動することを確認できればOKです。
-        <aside class="ts">
-  				<h4>TROUBLE SHOOTING: Python インタープリターが起動しない</h4>
-  				<p>
-  					パスの設定がうまくいかなかったと思われます。<br>
-  					設定方法については記事がたくさんありますので、「Python パスの設定」あたりでググってください。<br>
-            Anaconda2を、パスに加えてみてください。
-  				</p>
-  			</aside>
-      </p><p>
-        コマンドプロンプトにて（Pythonが起動していたらquit()します）、下記コマンドを打ちます、が…。<br>
+        ANACONDA NAVIGATOR から、Open Termnal を選択します
+        （PATHを通していればコマンドプロンプトからでもOK）。
+      </p>
+        <img src="article_5/pic_3.png">
+      <p>
+        そして下記コマンドを打ちます、が…。<br>
         <pre><code class="prettyprint">
 conda config --add channels https://conda.binstar.org/erik
 conda install -c erik psychopy
@@ -100,7 +94,8 @@ source activate psychopyenv
         <a href="https://qiita.com/yotayokuto/items/c55bfa2b892beddc488e">
         ここ</a>
         を参考に、pip で Psychopy のインストールを試みます。<br>
-        コマンドプロンプトを管理者として実行してから、下記コマンドを打ち込みます。<br>
+        先ほどと同様に、Open Terminal を選択します。
+        コマンドプロンプトでやる場合は、管理者として実行してから、下記コマンドを打ち込みます。<br>
         <pre><code class="prettyprint">
 activate base
 pip install psychopy
