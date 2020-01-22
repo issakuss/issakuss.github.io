@@ -109,7 +109,7 @@ class byte_array(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, byte_array, name)
     __repr__ = _swig_repr
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_byte_array(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -133,7 +133,7 @@ class float_array(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, float_array, name)
     __repr__ = _swig_repr
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_float_array(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -157,7 +157,7 @@ class Vector(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Vector, name)
     __repr__ = _swig_repr
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_Vector(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -202,7 +202,7 @@ class Vector(_object):
     if _newclass:normalized = _swig_property(LeapPython.Vector_normalized_get)
     def to_float_array(self): return [self.x, self.y, self.z]
     def to_tuple(self): return (self.x, self.y, self.z)
-    %
+
     __swig_destroy__ = LeapPython.delete_Vector
     __del__ = lambda self : None;
 Vector_swigregister = LeapPython.Vector_swigregister
@@ -229,7 +229,7 @@ class Matrix(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Matrix, name)
     __repr__ = _swig_repr
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_Matrix(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -269,7 +269,7 @@ class Matrix(_object):
         output[8],  output[9],  output[10], output[11] = self.z_basis.x, self.z_basis.y, self.z_basis.z, 0.0
         output[12], output[13], output[14], output[15] = self.origin.x,  self.origin.y,  self.origin.z,  1.0
         return output
-    %
+
     __swig_destroy__ = LeapPython.delete_Matrix
     __del__ = lambda self : None;
 Matrix_swigregister = LeapPython.Matrix_swigregister
@@ -297,7 +297,7 @@ class Pointable(Interface):
     ZONE_NONE = LeapPython.Pointable_ZONE_NONE
     ZONE_HOVERING = LeapPython.Pointable_ZONE_HOVERING
     ZONE_TOUCHING = LeapPython.Pointable_ZONE_TOUCHING
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Pointable()
         try: self.this.append(this)
         except: self.this = this
@@ -350,7 +350,7 @@ class Arm(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Arm, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Arm()
         try: self.this.append(this)
         except: self.this = this
@@ -389,7 +389,7 @@ class Bone(Interface):
     TYPE_PROXIMAL = LeapPython.Bone_TYPE_PROXIMAL
     TYPE_INTERMEDIATE = LeapPython.Bone_TYPE_INTERMEDIATE
     TYPE_DISTAL = LeapPython.Bone_TYPE_DISTAL
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Bone()
         try: self.this.append(this)
         except: self.this = this
@@ -437,7 +437,7 @@ class Finger(Pointable):
     TYPE_MIDDLE = LeapPython.Finger_TYPE_MIDDLE
     TYPE_RING = LeapPython.Finger_TYPE_RING
     TYPE_PINKY = LeapPython.Finger_TYPE_PINKY
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_Finger(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -460,7 +460,7 @@ class Tool(Pointable):
     for _s in [Pointable]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Tool, name)
     __repr__ = _swig_repr
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_Tool(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -479,7 +479,7 @@ class Hand(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Hand, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Hand()
         try: self.this.append(this)
         except: self.this = this
@@ -566,7 +566,7 @@ class Gesture(Interface):
     STATE_START = LeapPython.Gesture_STATE_START
     STATE_UPDATE = LeapPython.Gesture_STATE_UPDATE
     STATE_STOP = LeapPython.Gesture_STATE_STOP
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_Gesture(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -607,7 +607,7 @@ class SwipeGesture(Gesture):
     __repr__ = _swig_repr
     __swig_getmethods__["class_type"] = lambda x: LeapPython.SwipeGesture_class_type
     if _newclass:class_type = staticmethod(LeapPython.SwipeGesture_class_type)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_SwipeGesture(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -640,7 +640,7 @@ class CircleGesture(Gesture):
     __repr__ = _swig_repr
     __swig_getmethods__["class_type"] = lambda x: LeapPython.CircleGesture_class_type
     if _newclass:class_type = staticmethod(LeapPython.CircleGesture_class_type)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_CircleGesture(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -673,7 +673,7 @@ class ScreenTapGesture(Gesture):
     __repr__ = _swig_repr
     __swig_getmethods__["class_type"] = lambda x: LeapPython.ScreenTapGesture_class_type
     if _newclass:class_type = staticmethod(LeapPython.ScreenTapGesture_class_type)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_ScreenTapGesture(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -704,7 +704,7 @@ class KeyTapGesture(Gesture):
     __repr__ = _swig_repr
     __swig_getmethods__["class_type"] = lambda x: LeapPython.KeyTapGesture_class_type
     if _newclass:class_type = staticmethod(LeapPython.KeyTapGesture_class_type)
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_KeyTapGesture(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -733,7 +733,7 @@ class Screen(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Screen, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Screen()
         try: self.this.append(this)
         except: self.this = this
@@ -775,7 +775,7 @@ class Device(Interface):
     TYPE_PERIPHERAL = LeapPython.Device_TYPE_PERIPHERAL
     TYPE_LAPTOP = LeapPython.Device_TYPE_LAPTOP
     TYPE_KEYBOARD = LeapPython.Device_TYPE_KEYBOARD
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Device()
         try: self.this.append(this)
         except: self.this = this
@@ -821,7 +821,7 @@ class Image(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Image, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Image()
         try: self.this.append(this)
         except: self.this = this
@@ -873,7 +873,7 @@ class Image(Interface):
     if _newclass:data = _swig_property(data)
     __swig_getmethods__["distortion"] = distortion
     if _newclass:distortion = _swig_property(distortion)
-    %
+
     __swig_getmethods__["data_pointer"] = LeapPython.Image_data_pointer_get
     if _newclass:data_pointer = _swig_property(LeapPython.Image_data_pointer_get)
     __swig_getmethods__["distortion_pointer"] = LeapPython.Image_distortion_pointer_get
@@ -892,7 +892,7 @@ class Mask(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Mask, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Mask()
         try: self.this.append(this)
         except: self.this = this
@@ -922,7 +922,7 @@ class Mask(Interface):
         return ptr
     __swig_getmethods__["data"] = data
     if _newclass:data = _swig_property(data)
-    %
+
     __swig_getmethods__["data_pointer"] = LeapPython.Mask_data_pointer_get
     if _newclass:data_pointer = _swig_property(LeapPython.Mask_data_pointer_get)
     __swig_destroy__ = LeapPython.delete_Mask
@@ -942,7 +942,7 @@ class PointableList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, PointableList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_PointableList()
         try: self.this.append(this)
         except: self.this = this
@@ -963,7 +963,7 @@ class PointableList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_PointableList
     __del__ = lambda self : None;
 PointableList_swigregister = LeapPython.PointableList_swigregister
@@ -977,7 +977,7 @@ class FingerList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, FingerList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_FingerList()
         try: self.this.append(this)
         except: self.this = this
@@ -999,7 +999,7 @@ class FingerList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_FingerList
     __del__ = lambda self : None;
 FingerList_swigregister = LeapPython.FingerList_swigregister
@@ -1013,7 +1013,7 @@ class ToolList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, ToolList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_ToolList()
         try: self.this.append(this)
         except: self.this = this
@@ -1033,7 +1033,7 @@ class ToolList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_ToolList
     __del__ = lambda self : None;
 ToolList_swigregister = LeapPython.ToolList_swigregister
@@ -1047,7 +1047,7 @@ class HandList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, HandList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_HandList()
         try: self.this.append(this)
         except: self.this = this
@@ -1067,7 +1067,7 @@ class HandList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_HandList
     __del__ = lambda self : None;
 HandList_swigregister = LeapPython.HandList_swigregister
@@ -1081,7 +1081,7 @@ class GestureList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, GestureList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_GestureList()
         try: self.this.append(this)
         except: self.this = this
@@ -1095,7 +1095,7 @@ class GestureList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_GestureList
     __del__ = lambda self : None;
 GestureList_swigregister = LeapPython.GestureList_swigregister
@@ -1109,7 +1109,7 @@ class ScreenList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, ScreenList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_ScreenList()
         try: self.this.append(this)
         except: self.this = this
@@ -1124,7 +1124,7 @@ class ScreenList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_ScreenList
     __del__ = lambda self : None;
 ScreenList_swigregister = LeapPython.ScreenList_swigregister
@@ -1138,7 +1138,7 @@ class DeviceList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, DeviceList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_DeviceList()
         try: self.this.append(this)
         except: self.this = this
@@ -1152,7 +1152,7 @@ class DeviceList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_DeviceList
     __del__ = lambda self : None;
 DeviceList_swigregister = LeapPython.DeviceList_swigregister
@@ -1166,7 +1166,7 @@ class ImageList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, ImageList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_ImageList()
         try: self.this.append(this)
         except: self.this = this
@@ -1180,7 +1180,7 @@ class ImageList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_ImageList
     __del__ = lambda self : None;
 ImageList_swigregister = LeapPython.ImageList_swigregister
@@ -1194,7 +1194,7 @@ class TrackedQuad(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, TrackedQuad, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_TrackedQuad()
         try: self.this.append(this)
         except: self.this = this
@@ -1235,7 +1235,7 @@ class MaskList(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, MaskList, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_MaskList()
         try: self.this.append(this)
         except: self.this = this
@@ -1249,7 +1249,7 @@ class MaskList(Interface):
         while _pos < len(self):
             yield self[_pos]
             _pos += 1
-    %
+
     __swig_destroy__ = LeapPython.delete_MaskList
     __del__ = lambda self : None;
 MaskList_swigregister = LeapPython.MaskList_swigregister
@@ -1263,7 +1263,7 @@ class InteractionBox(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, InteractionBox, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_InteractionBox()
         try: self.this.append(this)
         except: self.this = this
@@ -1296,7 +1296,7 @@ class Frame(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Frame, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Frame()
         try: self.this.append(this)
         except: self.this = this
@@ -1352,7 +1352,7 @@ class Frame(Interface):
         LeapPython.Frame_deserialize(self, tup[0], tup[1])
     __swig_getmethods__["serialize"] = serialize
     if _newclass:serialize = _swig_property(serialize)
-    %
+
     __swig_destroy__ = LeapPython.delete_Frame
     __del__ = lambda self : None;
 Frame_swigregister = LeapPython.Frame_swigregister
@@ -1367,7 +1367,7 @@ class BugReport(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, BugReport, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_BugReport()
         try: self.this.append(this)
         except: self.this = this
@@ -1392,7 +1392,7 @@ class Config(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Config, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         this = LeapPython.new_Config()
         try: self.this.append(this)
         except: self.this = this
@@ -1433,7 +1433,7 @@ class Config(Interface):
         elif type == LeapPython.Config_TYPE_STRING:
             return LeapPython.Config_set_string(self, *args)
         return False
-    %
+
     __swig_destroy__ = LeapPython.delete_Config
     __del__ = lambda self : None;
 Config_swigregister = LeapPython.Config_swigregister
@@ -1449,7 +1449,7 @@ class Controller(Interface):
     __repr__ = _swig_repr
     __swig_destroy__ = LeapPython.delete_Controller
     __del__ = lambda self : None;
-    def __init__(self, *args): 
+    def __init__(self, *args):
         this = LeapPython.new_Controller(*args)
         try: self.this.append(this)
         except: self.this = this
@@ -1495,7 +1495,7 @@ class Listener(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Listener, name)
     __repr__ = _swig_repr
-    def __init__(self): 
+    def __init__(self):
         if self.__class__ == Listener:
             _self = None
         else:
@@ -1524,5 +1524,3 @@ Listener_swigregister = LeapPython.Listener_swigregister
 Listener_swigregister(Listener)
 
 # This file is compatible with both classic and new-style classes.
-
-
