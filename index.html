@@ -1,75 +1,215 @@
-<!DOCTYPE html>
-<html lang = "ja">
-  <head>
-    <meta charset = "UTF-8">
-    <meta name="description"
-          content="川島一朔（研究者）のウェブサイト。臨床心理学に関わる問題に、脳波などの神経指標と、機械学習などの情報処理技術を用いてアプローチします。最近は、マインドフルネス瞑想がマインドワンダリングのどういった側面に働きかけているのかについて研究しています。">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title> 川島一朔 </title>
-    <link href = "css/common.css" rel = "stylesheet" type = "text/css" media = "all">
-    <script src="./js/jquery-1.10.2.min.js"></script>
-    <script type = "text/javascript" src="js/swingBtns.js"></script>
-    <script type = "text/javascript" src="js/html-load.js"></script>
-    <script type = "text/javascript">
-      function load_top(){$("#contents").load("top.html");}
-      function load_profile(){$("#contents").load("profile.html");}
-      function load_tech(){$("#contents").load("tech.html");}
-      function openMenu(){$("#gnav_sp").slideToggle();}
-    </script>
-  </head>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Issaku Kawashima HP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--link rel="icon" type="image/svvg+xml" href="pic/issak-favicon.svg"/>-->
+		<link rel="shortcut icon" href="pic/favicon.ico" />
+		<link rel="icon" type="image/vnd.microsoft.icon" href="pic/favicon.ico">
+		<link rel="icon" type="image/x-icon" href="pic/favicon.ico">
+		<link rel="icon" href="pic/favicon.ico" />
+		<link rel="apple-touch-icon" href="pic/apple-touch-icon.png" sizes="180x180">
+		<link rel="icon" type="image/png" href="pic/android-touch-icon.png" sizes="192x192">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-  <body>
-    <header id="forPC">
-      <p>MENU ></p>
-      <nav id = "gnav">
-        <div id="btn_base">
-          <ul>
-      			<li><img src="./img/btn_base_top.png" width = 120 height = 120 class="btn"></li>
-      			<li><img src="./img/btn_base_profile.png" width = 120 height = 120 class="btn"></li>
-            <li><img src="./img/btn_base_tech.png" width = 120 height = 120 class="btn"></li>
-      		</ul>
-        </div>
-        <div id="btn_mount">
-          <ul>
-      			<li><img src="./img/btn_mount_top.png"
-                     width = 120 height = 120
-                     class="btn" id="btn_mount_top"
-                     onclick=load_top(); onmouseover="liftUp_top();" onmouseout="fall_top()"></li>
-      			<li><img src="./img/btn_mount_profile.png"
-                     width = 120 height = 120
-                     class="btn" id="btn_mount_profile"
-                     onclick=load_profile(); onmouseover="liftUp_profile();" onmouseout="fall_profile()"></li>
-            <li><img src="./img/btn_mount_tech.png"
-                     width = 120 height = 120
-                     class="btn" id="btn_mount_tech"
-                     onclick=load_tech(); onmouseover="liftUp_tech();" onmouseout="fall_tech()"></li>
-      		</ul>
-        </div>
-      </nav>
-    </header>
-		<header id="forSP">
-      <img src="./img/btn_menu.png" width = 60 height = 60 id="menuBtn" onclick=openMenu();>
-			<nav id = "gnav_sp">
-				<ul>
-					<li><p onclick="load_top(); openMenu()">TOP</p></li>
-					<li><p onclick="load_profile(); openMenu()">PROFILE</p></li>
-					<li><p onclick="load_tech(); openMenu()">TECH.</p></li>
-				</ul>
-			</nav>
-		</header>
-    <div id = "contents">
-    </div>
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+				<!-- Header -->
+					<header id="header" class="alt">
+						<span class="logo"><img src="pic/issak-logo.svg" alt="" /></span>
+						<h1>川島 一朔</h1>
+						<h2>Issaku Kawashima</h2>
+						<p>
+							博士 (人間科学, 早稲田大学), 臨床心理士, 公認心理師
+							<br>
+							ATR 脳情報通信総合研究所 認知機構研究所	数理知能研究室 専任研究員
+						</p>
+					</header>	
 
-    ga('create', 'UA-105084972-1', 'auto');
-    ga('send', 'pageview');
-    load_top();
-  </script>
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#intro" class="active">About</a></li>
+							<li><a href="#first">Publications</a></li>
+							<li><a href="#second">News & Links</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</nav>
 
-  </body>
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>ABOUT</h2>
+										</header>
+										<p>臨床心理学に関わる問題に、脳波などの神経指標と、
+											機械学習などの情報処理技術を用いてアプローチします。
+											最近は、マインドフルネス瞑想がマインドワンダリングの
+											どういった側面に働きかけているのかについて研究しています。								
+											<p class="small-text">Keyword: 臨床心理学，機械学習，認知心理学，マインドワンダリング，マインドフルネス</p>
+											<p class="small-text">
+												Ph.D (Human Science, Waseda Univ., Japan)
+												<br>
+												Clinical Psychologist, Certified Public Psychologist
+												<br>
+												Department of Neural Computation for Decision-making,
+												<br>
+												Brain Information Communication Research Lab. Group, ATR
+											</p>
+											<p class="small-text">I investigate themes of clinical psychology using neural indices such as EEG, and information processing techniques, such as machine learning.
+												<br>
+												I specialized in the research of mindfulness and my recent topics have focused on mind-wandering.
+												<br>
+												Keywords: clinical psychology, machine learning, cognitive psychology, mind wandering, mindfulness</p>
+									</div>
+									<span class="image"><img src="pic/profile.jpg" alt="" /></span>
+								</div>
+							</section>
+
+						<!-- First Section Major Achievements-->
+							<section id="first" class="main">
+								<header class="major">
+									<h2>PUBLICATIONS</h2>
+								</header>
+									<p><ul>
+										<li><b>Ecological momentary assessment of mind-wandering: meta-analysis and systematic review.</b><br>
+										Issaku Kawashima, Tomoko Hinuma, Saori C. Tanaka<br>
+										Scientific Reports 13 2873 2023 Feb</li><br>
+										<li><b>Pavlovian-based neurofeedback enhances meta-awareness of mind-wandering</b><br>
+										Issaku Kawashima, Toru Nagahama, Hiroaki Kumano, Keiko Momose, Saori C. Tanaka<br>
+										Neural Networks 158 239-248 2023 Jan </li><br>
+										<li><b>Prediction of Mind-Wandering with Electroencephalogram and Non-linear Regression Modeling</b><br>
+										Issaku Kawashima, Hiroaki Kumano<br>
+										Frontiers in Human Neuroscience 11 2017 Jul</li>
+									</ul></p>
+									<p><a href="https://researchmap.jp/issakuss">... and more</a></p>
+							</section>
+
+						<!-- Second Section News&Links-->
+							<section id="second" class="main">
+								<header class="major">
+									<h2>NEWS & LINKS</h2>
+								</header>
+								<div class="links">
+									<div class="content">
+										<dl>
+											<dd>
+												<i class="icon solid style4 fas fa-hashtag"></i>
+												<h3><a href="https://twitter.com/issaku_k">
+												<i class="far fa-arrow-alt-circle-right"></i>
+												<b>Twitter</b></a></h3>
+												News
+											</dd>
+											<dd>
+												<a class="twitter-timeline" data-chrome="noheader nofooter"
+												data-width="500" data-height="500" data-theme="light" 
+												href="https://twitter.com/issaku_k?ref_src=twsrc%5Etfw">Tweets by issaku_k</a> 
+												<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+											</dd>
+										</dl>
+									</div>
+										<dl>
+											<dd>
+												<i class="icon solid style1 fa-graduation-cap"></i>
+												<h3><a href="https://researchmap.jp/issakuss">
+												<i class="far fa-arrow-alt-circle-right"></i>
+												<b>Research map</b></a></h3>
+												詳細な経歴や業績
+												<p class="small-text">
+												Detailed career and works
+												</p>
+											</dd>
+											<dd>
+												<i class="icon solid style3 fas fa-laptop-code"></i>
+												<h3><a href="https://qiita.com/issakuss">
+												<i class="far fa-arrow-alt-circle-right"></i>
+												<b>Qiita</b></a></h3>
+												研究上で必要になった技術のメモ
+												<br>
+												<p class="small-text">情報が間違っている可能性もあるのでご利用は自己責任でお願いします。
+													<br>
+												Technical notes (written in Japanese)
+												</p>
+											</dd>
+											<dd>
+												<i class="icon solid style5 fas fa-link"></i>
+												<h3><b>Other</b></h3>
+												所属先や参画中のプロジェクトなど
+												<p class="small-text">
+												Lab and participating projects e.t.c.
+												</p>
+												<a class="small-text" href="https://bicr.atr.jp/ncd/">
+												<i class="far fa-arrow-alt-circle-right"></i>
+												ATR数理知能研究室
+												<br>
+												Department of Neural Computation for Decision-making</a>
+												<br>
+												<a class="small-text" href="https://bicr.atr.jp/MS9/">
+												<i class="far fa-arrow-alt-circle-right"></i>
+												ムーンショット目標9
+												<br>
+												The goal 9 of the moonshot R&D project</a>
+											</dd>
+										</dl>
+								</div>
+							</section>
+
+						<!-- Contact -->
+							<section id="contact" class="main special">
+								<header class="major">
+									<h2>CONTACT</h2>
+									<dl>
+										<dt class="icon brands fa-twitter"><a href="https://twitter.com/issaku_k"> twitter.com/issaku_k</a></dt>
+										<dt class="icon solid fa-envelope"> issaku.k.typica [at] icloud.com</dt>
+									</dl>
+								</header>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer" class="main">
+						<header class="major">
+							<h2>Like</h2>
+						</header>
+						<ul class="features">
+							<li>
+								<img class="container" src="pic/seal.jpg" alt="seels">
+								<h3>Seal</h3>
+							</li>
+							<li>
+								<img class="container" src="pic/dog.jpeg" alt="dogs">
+								<h3>Dog</h3>
+							</li>
+							<li>
+								<img class="container" src="pic/coffee.jpg" alt="coffee">
+								<h3>Coffee</h3>
+							</li>
+						</ul>
+					<!-- Copyright -->
+						<p class="copyright">Tomoko, my wife, created this website using the template:</p>
+						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
